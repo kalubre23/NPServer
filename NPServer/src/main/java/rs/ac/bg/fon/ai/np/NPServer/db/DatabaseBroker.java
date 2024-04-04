@@ -210,7 +210,7 @@ public class DatabaseBroker {
             String upit = "SELECT " + object.vratiVrednostiZaSelect()
                     + " FROM " + object.vratiNazivTabele()
                     + " WHERE " + object.vratiUslovZaVise();
-
+            System.out.println("Upit: "+upit);
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(upit);
             List<DomenskiObjekat> lista = object.vratiListuSvih(rs);
