@@ -2,20 +2,14 @@ package rs.ac.bg.fon.ai.np.NPServer.so;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Marka;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.UoceniKvar;
-import rs.ac.bg.fon.ai.np.NPServer.db.DatabaseBroker;
-import rs.ac.bg.fon.ai.np.NPServer.db.DatabaseConnection;
 import rs.ac.bg.fon.ai.np.NPServer.logic.Controller;
 
 

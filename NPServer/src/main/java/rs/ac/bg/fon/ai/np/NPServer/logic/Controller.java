@@ -4,12 +4,7 @@
  */
 package rs.ac.bg.fon.ai.np.NPServer.logic;
 
-
-
-import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.DeoAutomobila;

@@ -4,8 +4,6 @@
  */
 package rs.ac.bg.fon.ai.np.NPServer.so;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 import rs.ac.bg.fon.ai.np.NPCommon.domain.DomenskiObjekat;
@@ -27,7 +25,8 @@ public class PronadjiNalogeZaServisiranje extends AbstractSO {
         super();
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     protected void executeOperation(DomenskiObjekat object) throws Exception {
         listaNaloga = (List<NalogZaServisiranje>) (Object) databaseBroker.vratiViseSaUslovom(object);
 

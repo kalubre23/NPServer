@@ -4,9 +4,6 @@
  */
 package rs.ac.bg.fon.ai.np.NPServer.so;
 
-
-import javax.swing.table.AbstractTableModel;
-
 import rs.ac.bg.fon.ai.np.NPCommon.domain.DomenskiObjekat;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.NalogZaServisiranje;
 

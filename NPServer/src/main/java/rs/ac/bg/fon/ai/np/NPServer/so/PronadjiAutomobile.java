@@ -27,11 +27,11 @@ public class PronadjiAutomobile extends AbstractSO {
         super();
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     protected void executeOperation(DomenskiObjekat object) throws Exception {
         automobili = (List<Automobil>)(Object)databaseBroker.vratiViseSlozenihSaUslovom(object);
-        //ako vracam listu automobila, moram vratiti i i njihove kvarove
-        //prolazi se kroz listu ovih auta i vratiSaUslovom() kvarove za taj auto
+        
         System.out.println("Vraceni automobili:");
         if(automobili.isEmpty())
             System.out.println("Lista je prazna :(");

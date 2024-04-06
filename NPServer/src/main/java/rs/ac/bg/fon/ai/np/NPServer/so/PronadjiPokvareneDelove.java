@@ -27,7 +27,8 @@ public class PronadjiPokvareneDelove extends AbstractSO {
     }
     
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     protected void executeOperation(DomenskiObjekat object) throws Exception {
         listaPokvarenihDelova = (List<PokvareniDeo>)(Object) databaseBroker.vratiViseSaUslovom(object);
         if(listaPokvarenihDelova == null || listaPokvarenihDelova.isEmpty()){

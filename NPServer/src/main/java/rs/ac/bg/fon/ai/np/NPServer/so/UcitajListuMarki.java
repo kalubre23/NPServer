@@ -26,7 +26,8 @@ public class UcitajListuMarki extends AbstractSO {
         super();
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     protected void executeOperation(DomenskiObjekat object) throws Exception {
         listaMarki = (List<Marka>) (Object) databaseBroker.vratiSve(object);
     }
