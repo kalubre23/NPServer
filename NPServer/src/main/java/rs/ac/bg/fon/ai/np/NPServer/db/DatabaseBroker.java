@@ -14,17 +14,38 @@ import java.util.List;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.DomenskiObjekat;
 
 /**
+ * Predstavlja brokera baze podataka.
+ * 
+ * Ima konekciju ka bazi i genericke metode za ubacivanje, azuriranje, selektovanje i brisanje redova u tabeli.
  *
- * @author Cartman
+ * @author Luka Obrenic
+ * @since 1.0.0
  */
 public class DatabaseBroker {
 
+	/**
+	 * Konekcija ka bazi tipa Connection.
+	 */
     private final Connection connection;
-
+    
+    /**
+     * Parametrizovani konstruktor koji inicijalizuje objekat klase DatabaseBroker i dodeljuje vrednost atributu connection.
+     * @param connection - Vrednost koja se dodeljuje atributu connection
+     */
     public DatabaseBroker(Connection connection) {
         this.connection = connection;
     }
 
+    /**
+     * Genericka metoda koja vraca jedan red tabele iz baze podataka.
+     * 
+     * Vrsi SELECT upit nad bazom gde se za WHERE klauzulu koristi metoda vratiUslovZaJednog() domenske klase.
+     * @see DomenskiObjekat
+     * 
+     * @param objekat domenske klase
+     * @return objekat koji je inicijalizovan vrednostima iz baze
+     * @throws SQLException izuzetak ukoliko je doslo do greske pri interakciji sa bazom
+     */
     public DomenskiObjekat vratiJednog(DomenskiObjekat objekat) throws SQLException {
         try {
             String query = "SELECT " + objekat.vratiVrednostiZaSelect() + " FROM " + objekat.vratiNazivTabele() + " WHERE " + objekat.vratiUslovZaJednog();
@@ -63,10 +84,23 @@ public class DatabaseBroker {
     }
 
 
+    /**
+     * Vraca konekciju sa bazom tipa Connection
+     * @return
+     */
     public Connection getConnection() {
         return connection;
     }
 
+    /**
+     * Genericka metoda koja vraca sve redove tabele iz baze.
+     * 
+     * Vrsi SELECT upit nad bazom bez WHERE klauzule.
+     * 
+     * @param obj objekat domenske klase
+     * @return lista inicijalizovanih domenskih objekata
+     * @throws SQLException izuzetak ukoliko je doslo do greske pri interakciji sa bazom
+     */
     public List<DomenskiObjekat> vratiSve(DomenskiObjekat obj) throws SQLException {
         try {
             List<DomenskiObjekat> listaSvih;
@@ -89,6 +123,14 @@ public class DatabaseBroker {
         }
     }
 
+    /**
+     * Genericka metoda za dodavanje novog reda u tabeli u bazi.
+     * 
+     * Vrsi INSERT upit nad bazom.
+     * 
+     * @param object objekat domenske klase koji je potrebno sacuvati.
+     * @throws SQLException izuzetak ukoliko je doslo do greske pri interakciji sa bazom
+     */
     public void sacuvaj(DomenskiObjekat object) throws SQLException {
         try {
             String upit = "INSERT INTO " + object.vratiNazivTabele() + "(" + object.getKoloneZaInsert() + ")" + " VALUES " + "(" + object.vratiVrednostiZaInsert() + ")";
@@ -119,6 +161,20 @@ public class DatabaseBroker {
 
     }
 
+    /**
+     * Genericka metoda koja vraca vise redova tabele iz baze.
+     * 
+     * Da bi se inicijalizovao jedan objekat domenske klase potrebno je inicijalizovati i objekte druge 
+     * domenske klase koji su vezani za taj objekat i zatim ih dodeliti tom objektu kao linijsku strukturu.
+     * Prvo se pomocu SELECT upita vrate trazeni redovi i inicijalizuju objekti. Zatim se petljom za svaki takav objekat
+     * ponovo salje SELECT upit i vracaju oni redovi koji su vezani za ovaj objekat preko spoljnog kljuca. Ovi vezani objekti se 
+     * inicijalizuju i dodele "glavnom" objektu kao lista pomocu metode napuni().
+     * @see DomenskiObjekat
+     * 
+     * @param object koji daje implementirane metode opsteg domenskog objekta koje se koriste za upite
+     * @return lista trazenih inicijalizovanih domenskih objekata
+     * @throws Exception izuzetak ukoliko je doslo do greske pri interakciji sa bazom
+     */
     public List<DomenskiObjekat> vratiViseSlozenihSaUslovom(DomenskiObjekat object) throws Exception {
         try {
             String upit1 = "SELECT " + object.vratiVrednostiZaSelect() + " FROM "
@@ -161,6 +217,14 @@ public class DatabaseBroker {
         }
     }
 
+    /**
+     * Genericka metoda koja menja red u bazi. Pored ovog reda, brise redove u drugoj tabeli koji su povezani preko primarnog kljuca.
+     * 
+     * Vrsi UPDATE upit i menja vrednosti reda u tabeli. Nakon toga brise sve vezane redove druge tabele.
+     * @param object koji daje implementirane metode opsteg domenskog objekta koje se koriste za upite
+     * @see DomenskiObjekat
+     * @throws SQLException izuzetak ukoliko je doslo do greske pri interakciji sa bazom
+     */
     public void izmeniSlozeni(DomenskiObjekat object) throws SQLException {
         try {
             String upit1 = "UPDATE " + object.vratiNazivTabele()
@@ -172,8 +236,6 @@ public class DatabaseBroker {
             int result1 = statement.executeUpdate(upit1);
             System.out.println("Affected rows update: " + result1);
 
-            //sledece sto moram da uradim je da obrisem sve kvarove sa uslovom
-            //pa onda da ih ponovo ubacim
             String upit2 = "DELETE FROM " + object.vratiVezaniObjekat().vratiNazivTabele()
                     + " WHERE " + object.vratiUslovZaUpdate();
 
@@ -188,6 +250,14 @@ public class DatabaseBroker {
         }
     }
 
+    /**
+     * Genericka metoda za brisanje redova tabele u bazi.
+     * 
+     * Vrsi DELETE upit nad bazom.
+     * 
+     * @param object koji daje implementirane metode opsteg domenskog objekta koje se koriste za upit
+     * @throws SQLException izuzetak ukoliko je doslo do greske pri interakciji sa bazom
+     */
     public void obrisi(DomenskiObjekat object) throws SQLException {
         try {
             String upit = "DELETE FROM " + object.vratiNazivTabele()
@@ -205,6 +275,17 @@ public class DatabaseBroker {
         }
     }
 
+    /**
+     * Genericka metoda koja vraca sve redove tabele iz baze koji zadovoljavaju uslov.
+     * 
+     * Vrsi SELECT upit nad bazom gde se vrednosti za WHERE klauzulu dobijaju kao povratna 
+     * vrednost metode vratiUslovZaVise() domenskog objekta.
+     * 
+     * @see DomenskiObjekat
+     * @param obj koji daje implementirane metode opsteg domenskog objekta koje se koriste za upit
+     * @return lista inicijalizovanih domenskih objekata
+     * @throws SQLException izuzetak ukoliko je doslo do greske pri interakciji sa bazom
+     */
     public List<DomenskiObjekat> vratiViseSaUslovom(DomenskiObjekat object) throws SQLException {
         try {
             String upit = "SELECT " + object.vratiVrednostiZaSelect()
@@ -228,6 +309,16 @@ public class DatabaseBroker {
         }
     }
 
+    /**
+     * Genericka metoda koja menja red u bazi.
+     * 
+     * Vrsi UPDATE upit i menja vrednosti reda u tabeli. Vrednosti za WHERE klauzulu se dobijaju kao povratna 
+     * vrednost metode vratiUslovZaUpdate() domenskog objekta.
+     * 
+     * @see DomenskiObjekat
+     * @param object koji daje implementirane metode opsteg domenskog objekta koje se koriste za upite
+     * @throws SQLException izuzetak ukoliko je doslo do greske pri interakciji sa bazom
+     */
     public void izmeni(DomenskiObjekat object) throws SQLException {
         try {
             String upit = "UPDATE " + object.vratiNazivTabele() +
