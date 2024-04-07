@@ -11,13 +11,28 @@ import javax.swing.table.AbstractTableModel;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Serviser;
 
 /**
- *
- * @author Asus
+ * Predstavlja model tabele za klasu Serviser. Nasledjuje apstraktni model tabele i imeplementira njegove metode.
+ * 
+ * Ima listu svih uloganih servisera koji ce se prikazati u tabeli kao i metode za dodavanje 
+ * i brisanje servisera iz ove liste.
+ * 
+ * @see AbstractTableModel
+ * @author Luka Obrenic
  */
 public class TableModelServiser extends AbstractTableModel{
+	/**
+	 * Lista svih ulogovanih servisera kao lista tipa Serviser.
+	 * @see Serviser
+	 */
     List<Serviser> ulogovaniServiseri;
+    /**
+     * Nazivi kolona tabele kao niz stringova.
+     */
     String[] naziviKolona = {"Ime", "Prezime"};
 
+    /**
+     * Neparametrizovani konstruktor koji inicijalizuje listu ulogovanih servisera,
+     */
     public TableModelServiser() {
         ulogovaniServiseri = new ArrayList<>();
     }
@@ -49,11 +64,21 @@ public class TableModelServiser extends AbstractTableModel{
         return naziviKolona[column];
     }
     
+    /**
+     * Dodaje servisera u listu ulogovanih servisera i osvezava prikaz tabele na grafickoj formi.
+     * 
+     * @param s serviser koji se ulogovao
+     */
     public void dodajServisera(Serviser s){
         ulogovaniServiseri.add(s);
         fireTableDataChanged();
     }
 
+    /**
+     * Brise servisera iz liste ulogovanih servisera i osvezava prikaz tabele na grafickoj formi.
+     * 
+     * @param ulogovaniServiser koji se izlogovao
+     */
     public void obrisiServisera(Serviser ulogovaniServiser) {
         ulogovaniServiseri.remove(ulogovaniServiser);
         fireTableDataChanged();
