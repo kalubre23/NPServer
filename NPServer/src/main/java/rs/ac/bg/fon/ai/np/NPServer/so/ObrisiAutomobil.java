@@ -8,27 +8,42 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.DomenskiObjekat;
 
 /**
+ * Predstavlja konkretnu sistemsku operaciju za brisanje automobila iz baze. Nasledjuje 
+ * opstu sistemsku oepraciju.
  *
- * @author Asus
+ * @see AbstractSO
+ * @author Luka Obrenic
+ * @since 1.0.0
  */
 public class ObrisiAutomobil extends AbstractSO {
 
+	/**
+	 * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
+	 * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
+	 */
     public ObrisiAutomobil() throws Exception {
         super();
     }
 
+    /**
+     * Konkretna implementacija sistemske operacije brisanja automobila iz baze.
+     * 
+     * Poziva se metoda za brisanje u database brokeru i prosledjuje joj se automobil.
+     */
     @Override
     protected void executeOperation(DomenskiObjekat object) throws Exception {
         databaseBroker.obrisi(object);
-        //valjda je ovo dovoljno jebemliga
     }
 
+    /**
+     * Vrsi validaciju automobila.
+     * 
+     * Objekat mora biti instanca klase Automobil.
+     */
     @Override
     protected void validate(DomenskiObjekat object) throws Exception {
         if(!(object instanceof Automobil))
             throw new Exception("Objekat nije instanca klase Automobil");
-        //ovde ne moram da priveravam listu kvarova 
-        //jer se nadam da ce baza automatski da obrise kvarove
     }
 
 }
