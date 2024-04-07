@@ -12,15 +12,29 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.DomenskiObjekat;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.UoceniKvar;
 
 /**
+ * Predstavlja konkretnu sistemsku operaciju za izmenu podataka o automobilu u bazi. Nasledjuje 
+ * opstu sistemsku oepraciju.
  *
- * @author Asus
+ * @see AbstractSO
+ * @author Luka Obrenic
+ * @since 1.0.0
  */
 public class IzmeniAutomobil extends AbstractSO {
 
+	/**
+	 * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
+	 * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
+	 */
     public IzmeniAutomobil() throws Exception {
         super();
     }
 
+    /**
+     * Konkretna implementacija sistemske operacije izmene podataka o automobilu.
+     * 
+     * Azuriraju se vrednosti automobila u bazi, a zatim se obrisu svi uoceni kvarovi za taj automobil
+     * i dodaju novi.
+     */
     @Override
     protected void executeOperation(DomenskiObjekat object) throws Exception {
         //obrisi sve kvarove i sacuvaj novu listu kvarova
@@ -32,6 +46,11 @@ public class IzmeniAutomobil extends AbstractSO {
         }
     }
 
+    /**
+     * Vrsi validaciju automobila.
+     * 
+     * Objekat mora biti instanca klase Automobil i lista uocenih kvarova ne sme biti prazna.
+     */
     @Override
     protected void validate(DomenskiObjekat object) throws Exception {
         if (!(object instanceof Automobil)) {
