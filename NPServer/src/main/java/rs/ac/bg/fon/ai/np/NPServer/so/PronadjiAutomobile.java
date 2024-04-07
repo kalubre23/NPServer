@@ -11,22 +11,44 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.DomenskiObjekat;
 
 /**
+ * Predstavlja konkretnu sistemsku operaciju za pretrazivanje automobila u bazi. Nasledjuje 
+ * opstu sistemsku operaciju.
  *
- * @author Asus
+ * @see AbstractSO
+ * @author Luka Obrenic
+ * @since 1.0.0
  */
 public class PronadjiAutomobile extends AbstractSO {
 
+	/**
+	 * Lista automobila koji zadovoljavaju kriterijum pretrage.
+	 * @see Automobil
+	 */
     List<Automobil> automobili;
 
+    /**
+     * Vraca listu automobila koji zadovoljavaju kriterijum pretrage.
+     * @return automobili koji zadovoljavaju kriterijum pretrage, kao lista objekata domenske klase Automobil.
+     */
     public List<Automobil> getAutomobili() {
         return automobili;
     }
     
 
+    /**
+	 * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
+	 * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
+	 */
     public PronadjiAutomobile() throws Exception {
         super();
     }
 
+    /**
+     * Konkretna implementacija sistemske operacije pretrazivanja automobila iz baze.
+     * 
+     * Poziva se metoda za vracanje vise objekata u database brokeru i 
+     * prosledjuje joj se automobil koji sluzi kao kriterijum pretrage.
+     */
     @SuppressWarnings("unchecked")
 	@Override
     protected void executeOperation(DomenskiObjekat object) throws Exception {
@@ -41,6 +63,11 @@ public class PronadjiAutomobile extends AbstractSO {
         System.out.println();
     }
 
+    /**
+     * Vrsi validaciju automobila.
+     * 
+     * Objekat mora biti instanca klase Automobil.
+     */
     @Override
     protected void validate(DomenskiObjekat object) throws Exception {
         if(!(object instanceof Automobil))
