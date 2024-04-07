@@ -6,7 +6,7 @@ package rs.ac.bg.fon.ai.np.NPServer.thread;
 
 
 import java.io.IOException;
-
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
 
@@ -23,18 +23,58 @@ import rs.ac.bg.fon.ai.np.NPServer.server.Server;
 
 
 /**
- *
- * @author student2
+ * Predstavlja klijentsku nit na serverskoj strani koja komunicira sa klijentskom stranom.
+ * 
+ * Prima zahteve klijenta, prosledjuje ih kontroleru aplikacione logike i vraca odgovor nazad klijentu.
+ * Implementirana je kao nit, koja radi paralelno sa ostalim klijentskim nitima, nasledjivanjem klase Thread.
+ * 
+ * @see Controller
+ * @see Server
+ * @author Luka Obrenic
+ * @since 1.0.0
  */
 public class ClientThread extends Thread {
 
+	/**
+	 * Socket za komunikaciju sa klijentom tipa Socket.
+	 * @see Socket
+	 */
     private final Socket clientSocket;
+    /**
+     * Posiljaoc odgovora (Response-a) nazad do klijenta tipa Sender.
+     * @see Response
+     * @see Sender
+     */
     private Sender sender;
+    /**
+     * Primalac zahteva (Request-a) od klijenta tipa Receiver.
+     * @see Request
+     * @see Receiver
+     */
     private Receiver receiver;
+    /**
+     * Referenca ka kontroleru aplikacione logike tipa Controller.
+     * @see Controller
+     */
     private Controller controller;
+    /**
+     * Objekat servisera koja se dodeljuje klijentskoj niti kako bi se znalo da je taj serviser ulgovan kao
+     * i njegovi podaci.
+     * @see Serviser
+     */
     private Serviser ulogovaniServiser;
+    /**
+     * Referenca ka serveru tipa Server.
+     * @see Server
+     */
     private Server server;
 
+    /**
+     * Parametrizovani konstruktor za inicijalizaciju objekta klijentske niti i dodelu vrednosti atributima.
+     * 
+     * @param clientSocket - Socket koji se dodeljuje atributu socket
+     * @param server - Instanca servera koji se dodeljuje atributu server
+     */
     public ClientThread(Socket clientSocket, Server server) {
         this.clientSocket = clientSocket;
         sender = new Sender(clientSocket);
@@ -43,6 +83,21 @@ public class ClientThread extends Thread {
         this.server = server;
     }
 
+    /**
+     * Kada se klijentska nit pokrene start() metodom, pokrece se run() metoda i nit se izvrsava paralelno sa 
+     * svim ostalim nitima.
+     * 
+     * U while petlji, primalac zahteva, preko socketa, osluskuje nove zahteve sa klijentske strane.
+     * Kada se primi zahtev onda se na osnovu atributa Operation zahteva odredi ogvoracajuci slucaj u switch-u.
+     * Poziva se kontroler aplikacione logike da izvrsi odgovarajucu operaciju, prima se odgovor, dodeljuje se
+     * odgovoru koji se na kraju salje nazad do klijenta putem posaljiaoca.
+     * 
+     * While petlja se prekida ukoliko je nit prekinuta ili se javi izuzetak pri radu sa klijentskim socketom.
+     * Tada se zavrsava ova metoda i sam rad klijentske niti.
+     * 
+     * @see Thread
+     * @see Socket
+     */
     @Override
     public void run() {
         try {
@@ -153,10 +208,21 @@ public class ClientThread extends Thread {
 
     }
 
+    /**
+     * Vraca ulogvanog servisera kao Serviser.
+     * @see Serviser
+     * @return instancu ulogovanog servisera tipa Serviser
+     */
     public Serviser getUlogovaniServiser() {
         return this.ulogovaniServiser;
     }
 
+    /**
+     * Prekida klijentsku nit, zatvara socket i javlja serveru da 
+     * izbaci ovu klijentsku nit iz liste svih klijentskih niti.
+     * 
+     * Poziva se kada se klijent izloguje ili kada se zatvori socket na klijentskoj strani.
+     */
     private void zatvoriSocket() {
         if (!interrupted()) {
             interrupt();
