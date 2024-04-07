@@ -12,15 +12,28 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.DomenskiObjekat;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.UoceniKvar;
 
 /**
+ * Predstavlja konkretnu sistemsku operaciju za dodavanje automobila u bazu. Nasledjuje 
+ * opstu sistemsku oepraciju.
  *
- * @author student2
+ * @see AbstractSO
+ * @author Luka Obrenic
+ * @since 1.0.0
  */
 public class SacuvajAutomobil extends AbstractSO {
 
+	/**
+	 * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
+	 * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
+	 */
     public SacuvajAutomobil() throws Exception {
         super();
     }
 
+    /**
+     * Konkretna implementacija sistemske operacije dodavanja automobila u bazu.
+     * 
+     * Dodaje se automobil u bazu, a zatim se dodaju i svi uoceni kvarovi za taj automobil.
+     */
     @Override
     protected void executeOperation(DomenskiObjekat object) throws Exception {
         databaseBroker.sacuvaj(object);
@@ -30,6 +43,11 @@ public class SacuvajAutomobil extends AbstractSO {
     
     }
 
+    /**
+     * Vrsi validaciju automobila.
+     * 
+     * Objekat mora biti instanca klase Automobil i lista uocenih kvarova ne sme biti prazna.
+     */
     @Override
     protected void validate(DomenskiObjekat object) throws Exception {
         if (!(object instanceof Automobil)) {
