@@ -41,7 +41,7 @@ public class DatabaseConnection {
 	 * Inicijalizuje listu konekcija, inicijalizuje 10 konekcija i dodaje ih u tu
 	 * listu.
 	 * 
-	 * @throws SQLException ukoliko dodje do greske pri inicijalizaciji konekcije ka
+	 * @throws Exception ukoliko dodje do greske pri inicijalizaciji konekcije ka
 	 * bazi
 	 */
 	private DatabaseConnection() throws Exception {
@@ -104,6 +104,11 @@ public class DatabaseConnection {
 		return connection;
 	}
 
+	/**
+	 * Vraca konekciju cije parametre ucitava iz json fajla.
+	 * @return connection koja povezuje aplikaciju sa bazom, tipa Connection
+	 * @throws Exception ako dodje do greske pri ucitavanju json fajla ili inicijalizacije konekcije
+	 */
 	private Connection getConnection() throws Exception {
 
 		Connection connection;
