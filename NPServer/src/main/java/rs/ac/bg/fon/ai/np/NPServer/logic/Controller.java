@@ -76,7 +76,7 @@ public class Controller {
     /**
 	 * Poziva sistemsku operaciju koja dodaje automobil u bazu.
 	 * 
-	 * @param automobil koga treba dodati u bazu
+	 * @param automobil koga treba dodati u bazu, tipa {@link Automobil}
 	 * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
 	 */
     public void sacuvajAutomobil(Automobil automobil) throws Exception {
@@ -89,7 +89,7 @@ public class Controller {
 	 * 
 	 * Vraca popunjenu listu automobila iz baze ili baca izuzetak ukoliko dodje do greske.
 	 * 
-	 * @param automobil koji sluzi kao uslov za pretragu
+	 * @param automobil koji sluzi kao uslov za pretragu, tipa {@link Automobil}
 	 * @return listu automobila koji zadovoljavaju kriterijum pretrage
 	 * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
 	 */
@@ -102,7 +102,7 @@ public class Controller {
     /**
 	 * Poziva sistemsku operaciju koja menja podatke o automobilu u bazi.
 	 * 
-	 * @param autmomobil sa novim(izmenjenim) podacima
+	 * @param autmomobil sa novim (izmenjenim) podacima, tipa {@link Automobil}
 	 * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
 	 */
     public void izmeniAutomobil(Automobil automobil) throws Exception{
@@ -113,7 +113,7 @@ public class Controller {
     /**
 	 * Poziva sistemsku operaciju koja brise automobil iz baze.
 	 * 
-	 * @param autmomobil koga treba obrisati
+	 * @param autmomobil koga treba obrisati, tipa {@link Automobil}
 	 * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
 	 */
     public void obrisiAutomobil(Automobil automobilBrisanje) throws Exception {
@@ -138,7 +138,7 @@ public class Controller {
     /**
 	 * Poziva sistemsku operaciju koja dodaje pokvareni deo u bazu.
 	 * 
-	 * @param pokvareniDeo koga treba dodati u bazu
+	 * @param pokvareniDeo koga treba dodati u bazu, tipa {@link PokvareniDeo}
 	 * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
 	 */
     public void sacuvajPokvarenDeo(PokvareniDeo pokvareniDeo) throws Exception {
@@ -164,7 +164,7 @@ public class Controller {
     /**
 	 * Poziva sistemsku operaciju koja menja podatke o pokvarenom delu u bazi.
 	 * 
-	 * @param pdIzmena sa novim (izmenjenim) podacima o pokvrenom delu
+	 * @param pdIzmena sa novim (izmenjenim) podacima o pokavrenom delu, tipa {@link PokvareniDeo}
 	 * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
 	 */
     public void izmeniPokvarenDeo(PokvareniDeo pdIzmena) throws Exception {
@@ -175,7 +175,7 @@ public class Controller {
     /**
 	 * Poziva sistemsku operaciju koja brise pokvareni deo iz baze.
 	 * 
-	 * @param pdBrisanje pokvareni deo koga treba obrisati
+	 * @param pdBrisanje pokvareni deo koga treba obrisati, tipa {@link PokvareniDeo}
 	 * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
 	 */
     public void obrisiPokvarenDeo(PokvareniDeo pdBrisanje) throws Exception {
@@ -187,7 +187,7 @@ public class Controller {
     /**
 	 * Poziva sistemsku operaciju koja dodaje nalog za servisiranje u bazu.
 	 * 
-	 * @param nalogZaServisiranje koga treba dodati u bazu
+	 * @param nalogZaServisiranje koga treba dodati u bazu, tipa {@link NalogZaServisiranje}
 	 * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
 	 */
     public void sacuvajNalogZaServisiranje(NalogZaServisiranje nalogZaServisiranje) throws Exception {
@@ -200,7 +200,7 @@ public class Controller {
 	 * 
 	 * Vraca popunjenu listu naloga iz baze ili baca izuzetak ukoliko dodje do greske.
 	 * 
-	 * @param nalogPretraga koji sluzi kao kriterijum za pretragu
+	 * @param nalogPretraga koji sluzi kao kriterijum za pretragu, tipa {@link NalogZaServisiranje}
 	 * @return listu naloga za servisiranje koji zadovoljavaju kriterijum pretrage
 	 * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
 	 */
@@ -213,7 +213,7 @@ public class Controller {
     /**
 	 * Poziva sistemsku operaciju koja brise nalog iz baze.
 	 * 
-	 * @param nalogBrisanje nalog koga treba obrisati
+	 * @param nalogBrisanje nalog koga treba obrisati, tipa {@link NalogZaServisiranje}
 	 * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
 	 */
     public void obrisiNalog(NalogZaServisiranje nalogBrisanje) throws Exception {
@@ -221,22 +221,49 @@ public class Controller {
         obrisiNalogZaServisiranje.execute(nalogBrisanje);
     }
 
+    /**
+	 * Poziva sistemsku operaciju koja dodaje vlasnika u bazu.
+	 * 
+	 * @param vlasnikDodaj koga treba dodati u bazu, tipa {@link Vlasnik}
+	 * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
+	 */
     public void sacuvajVlasnika(Vlasnik vlasnikDodaj) throws Exception {
         SacuvajVlasnika sacuvajVlasnika = new SacuvajVlasnika();
         sacuvajVlasnika.execute(vlasnikDodaj);
     }
 
+    /**
+	 * Poziva sistemsku operaciju koja pronalazi vlasnika i vraca ih iz baze.
+	 * 
+	 * Vraca popunjenu listu vlasnika iz baze ili baca izuzetak ukoliko dodje do greske.
+	 * 
+	 * @param vlasnikPretraga koji sluzi kao kriterijum za pretragu, tipa {@link Vlasnik}
+	 * @return listu vlasnika koji zadovoljavaju kriterijum pretrage
+	 * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
+	 */
     public List<Vlasnik> pronadjiVlasnike(Vlasnik vlasnikPretraga) throws Exception {
         PronadjiVlasnike pronadjiVlasnike = new PronadjiVlasnike();
         pronadjiVlasnike.execute(vlasnikPretraga);
         return pronadjiVlasnike.getListaVlasnika();
     }
 
+    /**
+	 * Poziva sistemsku operaciju koja menja podatke o vlasniku u bazi.
+	 * 
+	 * @param vlasnikIzmena sa novim (izmenjenim) podacima o vlasniku, tipa {@link Vlasnik}
+	 * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
+	 */
     public void izmeniVlasnika(Vlasnik vlasnikIzmena) throws Exception {
         IzmeniVlasnika izmeniVlasnika = new IzmeniVlasnika();
         izmeniVlasnika.execute(vlasnikIzmena);
     }
 
+    /**
+	 * Poziva sistemsku operaciju koja brise vlasnika iz baze.
+	 * 
+	 * @param vlasnikBrisanje nalog koga treba obrisati, tipa {@link Vlasnik}
+	 * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
+	 */
     public void obrisiVlasnika(Vlasnik vlasnikBrisanje) throws Exception {
         ObrisiVlasnika obrisiVlasnika = new ObrisiVlasnika();
         obrisiVlasnika.execute(vlasnikBrisanje);
