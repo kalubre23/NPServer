@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Marka;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.UoceniKvar;
+import rs.ac.bg.fon.ai.np.NPCommon.domain.Vlasnik;
 import rs.ac.bg.fon.ai.np.NPServer.logic.Controller;
 
 class IzmeniAutomobilTest {
@@ -22,7 +23,9 @@ class IzmeniAutomobilTest {
 		
 		//Izmenjene vrednosti
 		a.setGodiste(2005);
-		a.setImePrezimeVlasnika("Petar Petrovic");
+		Vlasnik v = new Vlasnik();
+		v.setVlasnikID(2);
+		a.setVlasnik(v);
 		Marka marka = new Marka();
 		marka.setMarkaID(2);
 		a.setMarka(marka);
@@ -39,9 +42,9 @@ class IzmeniAutomobilTest {
 		controller.izmeniAutomobil(a);
 		
 		Automobil a1 = new Automobil();
-		a1.setImePrezimeVlasnika("Petar Petrovic");
+		a1.setTablice("KG555333");
 	
-		
+		//pretraga automobila prema tablicama
 		List<Automobil> sviAutomobili = controller.pronadjiAutomobile(a1);
 		
 		a1 = sviAutomobili.get(0);
@@ -50,8 +53,7 @@ class IzmeniAutomobilTest {
 		//a je automobil sa izmenjenim vrednostima nad kojim pozivamo sistemsku operaciju
 		assertEquals(a1.getMarka(), a.getMarka());
 		assertEquals(a1.getGodiste(), a.getGodiste());
-		assertEquals(a1.getImePrezimeVlasnika(), a.getImePrezimeVlasnika());
-		assertEquals(a1.getMarka(), a.getMarka());
+		assertEquals(a1.getVlasnik(), a.getVlasnik());
 		assertEquals(a1.getUoceniKvarovi(), a.getUoceniKvarovi());
 		
 	}

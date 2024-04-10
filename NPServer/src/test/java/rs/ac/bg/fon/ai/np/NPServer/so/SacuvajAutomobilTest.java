@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Marka;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.UoceniKvar;
+import rs.ac.bg.fon.ai.np.NPCommon.domain.Vlasnik;
 import rs.ac.bg.fon.ai.np.NPServer.logic.Controller;
 
 
@@ -25,7 +26,9 @@ public class SacuvajAutomobilTest {
 		Automobil auto = new Automobil();
 		auto.setTablice("KG555333");
 		auto.setGodiste(2000);
-		auto.setImePrezimeVlasnika("Zika Zikic");
+		Vlasnik v = new Vlasnik();
+		v.setVlasnikID(1);
+		auto.setVlasnik(v);
 		
 		Marka marka = new Marka();
 		marka.setMarkaID(3);
@@ -46,10 +49,10 @@ public class SacuvajAutomobilTest {
 		Controller controller = new Controller();
 		controller.sacuvajAutomobil(auto);
 		
-		//controller.pronadjiAutomobile() funkcija pretrazuje automobile prema imenu i prezimenu vlasnika
+		//controller.pronadjiAutomobile() funkcija pretrazuje automobile prema tablicama
 		//Ako joj posaljemo ovako inicijalizovan automobil, vratice sve automobile iz baze
 		Automobil a1 = new Automobil();
-		a1.setImePrezimeVlasnika("");
+		a1.setTablice("");
 	
 		List<Automobil> sviAutomobili = controller.pronadjiAutomobile(a1);
 		

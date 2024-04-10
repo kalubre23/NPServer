@@ -19,10 +19,10 @@ class ObrisiAutomobilTest {
 		Controller controller = new Controller();
 		controller.obrisiAutomobil(auto);
 		
-		//controller.pronadjiAutomobile() funkcija pretrazuje automobile prema imenu i prezimenu vlasnika
+		//controller.pronadjiAutomobile() funkcija pretrazuje automobile prema tablicama
 		//Ako joj posaljemo ovako inicijalizovan automobil, vratice sve automobile iz baze
 		Automobil a1 = new Automobil();
-		a1.setImePrezimeVlasnika("");
+		a1.setTablice("");
 	
 		List<Automobil> sviAutomobili = controller.pronadjiAutomobile(a1);
 		
