@@ -12,18 +12,23 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.Marka;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.NalogZaServisiranje;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.PokvareniDeo;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Serviser;
+import rs.ac.bg.fon.ai.np.NPCommon.domain.Vlasnik;
 import rs.ac.bg.fon.ai.np.NPServer.so.IzmeniAutomobil;
 import rs.ac.bg.fon.ai.np.NPServer.so.IzmeniPokvarenDeo;
+import rs.ac.bg.fon.ai.np.NPServer.so.IzmeniVlasnika;
 import rs.ac.bg.fon.ai.np.NPServer.so.LoginServiser;
 import rs.ac.bg.fon.ai.np.NPServer.so.ObrisiAutomobil;
 import rs.ac.bg.fon.ai.np.NPServer.so.ObrisiNalogZaServisiranje;
 import rs.ac.bg.fon.ai.np.NPServer.so.ObrisiPokvarenDeo;
+import rs.ac.bg.fon.ai.np.NPServer.so.ObrisiVlasnika;
 import rs.ac.bg.fon.ai.np.NPServer.so.PronadjiAutomobile;
 import rs.ac.bg.fon.ai.np.NPServer.so.PronadjiNalogeZaServisiranje;
 import rs.ac.bg.fon.ai.np.NPServer.so.PronadjiPokvareneDelove;
+import rs.ac.bg.fon.ai.np.NPServer.so.PronadjiVlasnike;
 import rs.ac.bg.fon.ai.np.NPServer.so.SacuvajAutomobil;
 import rs.ac.bg.fon.ai.np.NPServer.so.SacuvajNalogZaServisiranje;
 import rs.ac.bg.fon.ai.np.NPServer.so.SacuvajPokvarenDeo;
+import rs.ac.bg.fon.ai.np.NPServer.so.SacuvajVlasnika;
 import rs.ac.bg.fon.ai.np.NPServer.so.UcitajListuDelovaAutomobila;
 import rs.ac.bg.fon.ai.np.NPServer.so.UcitajListuMarki;
 
@@ -214,5 +219,26 @@ public class Controller {
     public void obrisiNalog(NalogZaServisiranje nalogBrisanje) throws Exception {
         ObrisiNalogZaServisiranje obrisiNalogZaServisiranje = new ObrisiNalogZaServisiranje();
         obrisiNalogZaServisiranje.execute(nalogBrisanje);
+    }
+
+    public void sacuvajVlasnika(Vlasnik vlasnikDodaj) throws Exception {
+        SacuvajVlasnika sacuvajVlasnika = new SacuvajVlasnika();
+        sacuvajVlasnika.execute(vlasnikDodaj);
+    }
+
+    public List<Vlasnik> pronadjiVlasnike(Vlasnik vlasnikPretraga) throws Exception {
+        PronadjiVlasnike pronadjiVlasnike = new PronadjiVlasnike();
+        pronadjiVlasnike.execute(vlasnikPretraga);
+        return pronadjiVlasnike.getListaVlasnika();
+    }
+
+    public void izmeniVlasnika(Vlasnik vlasnikIzmena) throws Exception {
+        IzmeniVlasnika izmeniVlasnika = new IzmeniVlasnika();
+        izmeniVlasnika.execute(vlasnikIzmena);
+    }
+
+    public void obrisiVlasnika(Vlasnik vlasnikBrisanje) throws Exception {
+        ObrisiVlasnika obrisiVlasnika = new ObrisiVlasnika();
+        obrisiVlasnika.execute(vlasnikBrisanje);
     }
 }

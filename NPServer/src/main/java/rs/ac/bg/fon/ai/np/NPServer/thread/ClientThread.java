@@ -18,6 +18,7 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.NalogZaServisiranje;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.PokvareniDeo;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Serviser;
+import rs.ac.bg.fon.ai.np.NPCommon.domain.Vlasnik;
 import rs.ac.bg.fon.ai.np.NPServer.logic.Controller;
 import rs.ac.bg.fon.ai.np.NPServer.server.Server;
 
@@ -179,6 +180,25 @@ public class ClientThread extends Thread {
                             case OBRISI_NALOG_ZA_SERVISIRANJE:
                                 NalogZaServisiranje nalogBrisanje = (NalogZaServisiranje) request.getArgument();
                                 controller.obrisiNalog(nalogBrisanje);
+                                break;
+                            case SACUVAJ_VLASNIKA:
+                                Vlasnik vlasnikDodaj = (Vlasnik) request.getArgument();
+                                controller.sacuvajVlasnika(vlasnikDodaj);
+                                response.setResult(vlasnikDodaj);
+                                break;
+                            case PRONADJI_VLASNIKE:
+                                Vlasnik vlasnikPretraga = (Vlasnik) request.getArgument();
+                                List<Vlasnik> vlasniciPretraga = controller.pronadjiVlasnike(vlasnikPretraga);
+                                response.setResult(vlasniciPretraga);
+                                break;
+                            case IZMENI_VLASNIKA:
+                                Vlasnik vlasnikIzmena = (Vlasnik) request.getArgument();
+                                controller.izmeniVlasnika(vlasnikIzmena);
+                                response.setResult(vlasnikIzmena);
+                                break;
+                            case OBRISI_VLASNIKA:
+                                Vlasnik vlasnikBrisanje = (Vlasnik) request.getArgument();
+                                controller.obrisiVlasnika(vlasnikBrisanje);
                                 break;
                             case LOGOUT:
                                 //Serviser serviserLogout = (Serviser) request.getArgument();
