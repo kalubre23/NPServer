@@ -85,7 +85,7 @@ public class Server extends Thread {
     public void run() {
         try {
             serverSocket = new ServerSocket(brPorta);
-            int trenutniBrojKlijenata = 0;
+            //int trenutniBrojKlijenata = 0;
             while (!interrupted()) {
                 if (clients.size() >= maxBrKlijenata) {
                     serverSocket.close();
