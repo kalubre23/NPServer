@@ -4,9 +4,14 @@
  */
 package rs.ac.bg.fon.ai.np.NPServer.ui.form;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -125,6 +130,7 @@ public class FrmKonfiguracija extends javax.swing.JDialog {
         }
         gf.setBrPorta(brojPorta);
         gf.setMaxBrKlijenata(maxBrKlijenata);
+
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

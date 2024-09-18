@@ -5,9 +5,9 @@
 package rs.ac.bg.fon.ai.np.NPServer.ui.form;
 
 import java.awt.Color;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Properties;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -240,10 +240,10 @@ public class FrmServer extends javax.swing.JFrame {
      */
     private void btnPokreniServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPokreniServerActionPerformed
         // TODO add your handling code here:
-        if(lblBrPorta.getText().equals("nije unet")){
-            JOptionPane.showMessageDialog(this, "Nisu uneti broj porta i broj podrzanih klijenata!", "Greska", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+//        if(lblBrPorta.getText().equals("nije unet")){
+//            JOptionPane.showMessageDialog(this, "Nisu uneti broj porta i broj podrzanih klijenata!", "Greska", JOptionPane.ERROR_MESSAGE);
+//            return;
+//        }
         pokreniServer();
     }//GEN-LAST:event_btnPokreniServerActionPerformed
 
@@ -320,8 +320,9 @@ public class FrmServer extends javax.swing.JFrame {
      * Postavlja sve pocetne vrednosti atributa komponenti pre nego sto se forma prikaze.
      */
     private void prepareView() {
-        lblBrPorta.setText("nije unet");
-        lblmaxBrKlijenata.setText("nije uneto");
+//        lblBrPorta.setText("nije unet");
+//        lblmaxBrKlijenata.setText("nije uneto");
+        handleServerConfig();
         lblStatusServera.setText("Server nije pokrenut!");
         lblStatusServera.setForeground(Color.red);
         btnZaustaviServer.setEnabled(false);
@@ -378,4 +379,22 @@ public class FrmServer extends javax.swing.JFrame {
     public void obrisiServiseraIzTabele(Serviser ulogovaniServiser) {
         ((TableModelServiser)tblServiseri.getModel()).obrisiServisera(ulogovaniServiser);
     }
+
+    private void handleServerConfig() {
+        try {
+            Properties appProps = new Properties();
+            appProps.load(new FileInputStream("./src/main/java/resources/config.properties"));
+            
+            int brKlijenata = Integer.parseInt(appProps.getProperty("br_klijenata"));
+            int port = Integer.parseInt(appProps.getProperty("port"));
+            setMaxBrKlijenata(brKlijenata);
+            setBrPorta(port);
+            
+        } catch (IOException ex) {
+            System.out.println("Greska kod ucitavanja server config-a!");
+            ex.printStackTrace();
+        }
+    }
+
+
 }
