@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.NalogZaServisiranje;
-import rs.ac.bg.fon.ai.np.NPCommon.domain.Serviser;
+import rs.ac.bg.fon.ai.np.NPCommon.domain.Korisnik;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.UoceniKvar;
 import rs.ac.bg.fon.ai.np.NPServer.logic.Controller;
 
@@ -30,7 +30,7 @@ class SacuvajNalogZaServisiranjeTest {
 		uk.setAutomobil(a1);
 		n.setKvar(uk);
 		
-		Serviser s = new Serviser();
+		Korisnik s = new Korisnik();
 		s.setServiserID(1);
 		n.setServiser(s);
 		

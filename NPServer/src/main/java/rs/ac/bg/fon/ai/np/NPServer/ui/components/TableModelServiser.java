@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-import rs.ac.bg.fon.ai.np.NPCommon.domain.Serviser;
+import rs.ac.bg.fon.ai.np.NPCommon.domain.Korisnik;
 
 /**
  * Predstavlja model tabele za klasu Serviser. Nasledjuje apstraktni model tabele i imeplementira njegove metode.
@@ -22,9 +22,9 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.Serviser;
 public class TableModelServiser extends AbstractTableModel{
 	/**
 	 * Lista svih ulogovanih servisera kao lista tipa Serviser.
-	 * @see Serviser
+	 * @see Korisnik
 	 */
-    List<Serviser> ulogovaniServiseri;
+    List<Korisnik> ulogovaniServiseri;
     /**
      * Nazivi kolona tabele kao niz stringova.
      */
@@ -50,7 +50,7 @@ public class TableModelServiser extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Serviser s = ulogovaniServiseri.get(rowIndex);
+        Korisnik s = ulogovaniServiseri.get(rowIndex);
         
         switch(columnIndex){
             case 0: return s.getIme();
@@ -69,7 +69,7 @@ public class TableModelServiser extends AbstractTableModel{
      * 
      * @param s serviser koji se ulogovao
      */
-    public void dodajServisera(Serviser s){
+    public void dodajServisera(Korisnik s){
         ulogovaniServiseri.add(s);
         fireTableDataChanged();
     }
@@ -79,7 +79,7 @@ public class TableModelServiser extends AbstractTableModel{
      * 
      * @param ulogovaniServiser koji se izlogovao
      */
-    public void obrisiServisera(Serviser ulogovaniServiser) {
+    public void obrisiServisera(Korisnik ulogovaniServiser) {
         ulogovaniServiseri.remove(ulogovaniServiser);
         fireTableDataChanged();
     }

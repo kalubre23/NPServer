@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import rs.ac.bg.fon.ai.np.NPCommon.domain.Serviser;
+import rs.ac.bg.fon.ai.np.NPCommon.domain.Korisnik;
 import rs.ac.bg.fon.ai.np.NPServer.thread.ClientThread;
 import rs.ac.bg.fon.ai.np.NPServer.ui.form.FrmServer;
 
@@ -117,7 +117,7 @@ public class Server extends Thread {
      * 		<li> false ako je serviser vec ulogovan tj dodeljen nekoj klijentskoj niti</li>
      * </ul>
      */
-    public boolean nijeUlogovan(Serviser serviser) {
+    public boolean nijeUlogovan(Korisnik serviser) {
         for (ClientThread client : clients) {
             if (serviser.equals(client.getUlogovaniServiser())) {
                 return false;
@@ -147,7 +147,7 @@ public class Server extends Thread {
      * serverskoj grafickoj formi.
      * @param ulogovaniServiser koji se dodaje serverskoj formi
      */
-    public void dodajServiseraUTabelu(Serviser ulogovaniServiser) {
+    public void dodajServiseraUTabelu(Korisnik ulogovaniServiser) {
         sf.dodajServisera(ulogovaniServiser);
     }
 

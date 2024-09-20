@@ -16,7 +16,7 @@ import rs.ac.bg.fon.ai.np.NPCommon.communication.Sender;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.NalogZaServisiranje;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.PokvareniDeo;
-import rs.ac.bg.fon.ai.np.NPCommon.domain.Serviser;
+import rs.ac.bg.fon.ai.np.NPCommon.domain.Korisnik;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Vlasnik;
 import rs.ac.bg.fon.ai.np.NPServer.logic.Controller;
 import rs.ac.bg.fon.ai.np.NPServer.server.Server;
@@ -60,9 +60,9 @@ public class ClientThread extends Thread {
     /**
      * Objekat servisera koja se dodeljuje klijentskoj niti kako bi se znalo da je taj serviser ulgovan kao
      * i njegovi podaci.
-     * @see Serviser
+     * @see Korisnik
      */
-    private Serviser ulogovaniServiser;
+    private Korisnik ulogovaniServiser;
     /**
      * Referenca ka serveru tipa Server.
      * @see Server
@@ -111,7 +111,7 @@ public class ClientThread extends Thread {
                     try {
                         switch (request.getOperation()) {
                             case LOGIN:
-                                Serviser serviser = (Serviser) request.getArgument();
+                                Korisnik serviser = (Korisnik) request.getArgument();
                                 if (server.nijeUlogovan(serviser)) {
                                     response.setResult(controller.login(serviser));
                                     this.ulogovaniServiser = serviser;
@@ -147,10 +147,14 @@ public class ClientThread extends Thread {
                             case UCITAJ_LISTU_DELOVA_AUTOMOBILA:
                                 response.setResult(controller.ucitajListuDelovaAutomobila());
                                 break;
+                            case VRATI_SVE_SERVISERE:
+                                response.setResult(controller.vratiSveServisere());
+                                break;
                             case SACUVAJ_POKVAREN_DEO:
-                                PokvareniDeo pokvareniDeo = (PokvareniDeo) request.getArgument();
-                                controller.sacuvajPokvarenDeo(pokvareniDeo);
-                                response.setResult(pokvareniDeo);
+                                List<PokvareniDeo> listaDelova = (List<PokvareniDeo>) request.getArgument();
+                                System.out.println("OVO SE IZVRSILO");
+                                controller.sacuvajPokvarenDeo(listaDelova);
+                                response.setResult("Uspesno");
                                 break;
                             case PRONADJI_POKVARENE_DELOVE:
                                 PokvareniDeo pd = (PokvareniDeo) request.getArgument();
@@ -229,10 +233,10 @@ public class ClientThread extends Thread {
 
     /**
      * Vraca ulogvanog servisera kao Serviser.
-     * @see Serviser
+     * @see Korisnik
      * @return instancu ulogovanog servisera tipa Serviser
      */
-    public Serviser getUlogovaniServiser() {
+    public Korisnik getUlogovaniServiser() {
         return this.ulogovaniServiser;
     }
 

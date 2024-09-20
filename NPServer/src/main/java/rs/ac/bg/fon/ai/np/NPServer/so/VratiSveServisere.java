@@ -4,39 +4,38 @@
  */
 package rs.ac.bg.fon.ai.np.NPServer.so;
 
+import java.util.List;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.DomenskiObjekat;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Korisnik;
 
 /**
  *
- * @author student2
+ * @author Asus
  */
-public class LoginServiser extends AbstractSO {
+public class VratiSveServisere extends AbstractSO{
+    
+    List<Korisnik> listaServisera;
 
-    private Korisnik serviser;
+    public List<Korisnik> getListaServisera() {
+        return listaServisera;
+    }
 
-    public LoginServiser() throws Exception {
+    public VratiSveServisere() throws Exception {
         super();
     }
-
-    public Korisnik getServiser() {
-        return serviser;
-    }
+    
+    
 
     @Override
     protected void executeOperation(DomenskiObjekat object) throws Exception {
-        serviser = (Korisnik) databaseBroker.vratiJednog(object);
-        System.out.println("u LoginServiser koja poziva dbbr je serviser: "+serviser);
-        if (serviser == null) {
-            throw new Exception("Korisnik ne postoji.");
+        listaServisera = (List<Korisnik>)(Object) databaseBroker.vratiViseSaUslovom(object);
+        if(listaServisera == null || listaServisera.isEmpty()){
+            System.out.println("LISTA SERVISERA JE PRAZNA U SO!");
         }
     }
 
     @Override
     protected void validate(DomenskiObjekat object) throws Exception {
-        if (!(object instanceof Korisnik)) {
-            throw new Exception("Object is not valid");
-        }
     }
-
+    
 }

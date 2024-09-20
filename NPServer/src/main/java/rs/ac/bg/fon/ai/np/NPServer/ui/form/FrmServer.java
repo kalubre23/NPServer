@@ -11,7 +11,7 @@ import java.util.Properties;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-import rs.ac.bg.fon.ai.np.NPCommon.domain.Serviser;
+import rs.ac.bg.fon.ai.np.NPCommon.domain.Korisnik;
 import rs.ac.bg.fon.ai.np.NPServer.server.Server;
 import rs.ac.bg.fon.ai.np.NPServer.ui.components.TableModelServiser;
 
@@ -364,9 +364,9 @@ public class FrmServer extends javax.swing.JFrame {
      * Dodaje servisera u listu svih ulogovanih servisera u table modelu.
      * 
      * @param ulogovaniServiser koji se dodaje u tabelu, tipa Serviser.
-     * @see Serviser
+     * @see Korisnik
      */
-    public void dodajServisera(Serviser ulogovaniServiser) {
+    public void dodajServisera(Korisnik ulogovaniServiser) {
         ((TableModelServiser)tblServiseri.getModel()).dodajServisera(ulogovaniServiser);
     }
 
@@ -374,9 +374,9 @@ public class FrmServer extends javax.swing.JFrame {
      * Brise servisera iz liste svih ulogovanih servisera u table modelu.
      * 
      * @param ulogovaniServiser koji se brise iz tabele, tipa Serviser.
-     * @see Serviser
+     * @see Korisnik
      */
-    public void obrisiServiseraIzTabele(Serviser ulogovaniServiser) {
+    public void obrisiServiseraIzTabele(Korisnik ulogovaniServiser) {
         ((TableModelServiser)tblServiseri.getModel()).obrisiServisera(ulogovaniServiser);
     }
 

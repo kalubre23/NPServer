@@ -8,10 +8,11 @@ import java.util.List;
 
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.DeoAutomobila;
+import rs.ac.bg.fon.ai.np.NPCommon.domain.DomenskiObjekat;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Marka;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.NalogZaServisiranje;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.PokvareniDeo;
-import rs.ac.bg.fon.ai.np.NPCommon.domain.Serviser;
+import rs.ac.bg.fon.ai.np.NPCommon.domain.Korisnik;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Vlasnik;
 import rs.ac.bg.fon.ai.np.NPServer.so.IzmeniAutomobil;
 import rs.ac.bg.fon.ai.np.NPServer.so.IzmeniPokvarenDeo;
@@ -31,6 +32,7 @@ import rs.ac.bg.fon.ai.np.NPServer.so.SacuvajPokvarenDeo;
 import rs.ac.bg.fon.ai.np.NPServer.so.SacuvajVlasnika;
 import rs.ac.bg.fon.ai.np.NPServer.so.UcitajListuDelovaAutomobila;
 import rs.ac.bg.fon.ai.np.NPServer.so.UcitajListuMarki;
+import rs.ac.bg.fon.ai.np.NPServer.so.VratiSveServisere;
 
 
 /**
@@ -52,7 +54,7 @@ public class Controller {
 	 * @return inicijalizovanog servisera sa vrednostima iz baze
 	 * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
 	 */
-    public Serviser login(Serviser serviser) throws Exception {
+    public Korisnik login(Korisnik serviser) throws Exception {
         LoginServiser loginServiser = new LoginServiser();
         // User u= loginUser.execute(user);
         loginServiser.execute(serviser);
@@ -141,9 +143,13 @@ public class Controller {
 	 * @param pokvareniDeo koga treba dodati u bazu, tipa {@link PokvareniDeo}
 	 * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
 	 */
-    public void sacuvajPokvarenDeo(PokvareniDeo pokvareniDeo) throws Exception {
+    public void sacuvajPokvarenDeo(List<PokvareniDeo> listaDelova) throws Exception {
         SacuvajPokvarenDeo sacuvajPokvarenDeo = new SacuvajPokvarenDeo();
-        sacuvajPokvarenDeo.execute(pokvareniDeo);
+        for(PokvareniDeo d : listaDelova){ 
+            System.out.println(d);
+            sacuvajPokvarenDeo.execute(d);
+            System.out.println("Ovo radi");
+        }
     }
 
     /**
@@ -267,5 +273,11 @@ public class Controller {
     public void obrisiVlasnika(Vlasnik vlasnikBrisanje) throws Exception {
         ObrisiVlasnika obrisiVlasnika = new ObrisiVlasnika();
         obrisiVlasnika.execute(vlasnikBrisanje);
+    }
+
+    public List<Korisnik> vratiSveServisere() throws Exception {
+        VratiSveServisere vratiSveServisere = new VratiSveServisere();
+        vratiSveServisere.execute(new Korisnik());
+        return vratiSveServisere.getListaServisera();
     }
 }

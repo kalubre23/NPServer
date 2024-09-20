@@ -4,6 +4,7 @@
  */
 package rs.ac.bg.fon.ai.np.NPServer.so;
 
+import java.util.List;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.DomenskiObjekat;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.PokvareniDeo;
 
