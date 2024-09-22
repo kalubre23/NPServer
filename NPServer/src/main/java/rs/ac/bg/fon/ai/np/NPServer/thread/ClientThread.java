@@ -180,6 +180,11 @@ public class ClientThread extends Thread {
                                 List<NalogZaServisiranje> naloziPretraga = controller.pronadjiNalogeZaServisiranje(nalogPretraga);
                                 response.setResult(naloziPretraga);
                                 break;
+                            case IZMENI_NALOG_ZA_SERVISIRANJE:
+                                NalogZaServisiranje nalogIzmena = (NalogZaServisiranje) request.getArgument();
+                                controller.izmeniNalog(nalogIzmena);
+                                response.setResult(nalogIzmena);
+                                break;
                             case OBRISI_NALOG_ZA_SERVISIRANJE:
                                 NalogZaServisiranje nalogBrisanje = (NalogZaServisiranje) request.getArgument();
                                 controller.obrisiNalog(nalogBrisanje);

@@ -28,7 +28,7 @@
 	<dependency>
 	  <groupId>rs.ac.bg.fon.ai.np</groupId>
 	  <artifactId>NPCommon</artifactId>
-	  <version>1.0.0</version>
+	  <version>1.0.1</version>
 	</dependency>
 	<dependency>
 	    <groupId>com.google.code.gson</groupId>

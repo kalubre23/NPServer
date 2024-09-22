@@ -59,7 +59,7 @@ public abstract class AbstractSO {
             throw ex;
         } finally {
             //valjda kad sam zavrsio sistemsku op treba da vratim konekciju
-            //DatabaseConnection.getInstance().push(databaseBroker.getConnection());
+            DatabaseConnection.getInstance().push(databaseBroker.getConnection());
         }
     }
 

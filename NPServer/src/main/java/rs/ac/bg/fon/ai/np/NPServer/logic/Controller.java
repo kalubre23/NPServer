@@ -8,13 +8,13 @@ import java.util.List;
 
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Automobil;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.DeoAutomobila;
-import rs.ac.bg.fon.ai.np.NPCommon.domain.DomenskiObjekat;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Marka;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.NalogZaServisiranje;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.PokvareniDeo;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Korisnik;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Vlasnik;
 import rs.ac.bg.fon.ai.np.NPServer.so.IzmeniAutomobil;
+import rs.ac.bg.fon.ai.np.NPServer.so.IzmeniNalogZaServisiranje;
 import rs.ac.bg.fon.ai.np.NPServer.so.IzmeniPokvarenDeo;
 import rs.ac.bg.fon.ai.np.NPServer.so.IzmeniVlasnika;
 import rs.ac.bg.fon.ai.np.NPServer.so.LoginServiser;
@@ -279,5 +279,10 @@ public class Controller {
         VratiSveServisere vratiSveServisere = new VratiSveServisere();
         vratiSveServisere.execute(new Korisnik());
         return vratiSveServisere.getListaServisera();
+    }
+
+    public void izmeniNalog(NalogZaServisiranje nalogIzmena) throws Exception {
+        IzmeniNalogZaServisiranje izmeniNalogZaServisiranje = new IzmeniNalogZaServisiranje();
+        izmeniNalogZaServisiranje.execute(nalogIzmena);
     }
 }
