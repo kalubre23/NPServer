@@ -11,36 +11,37 @@ import javax.swing.table.AbstractTableModel;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Korisnik;
 
 /**
- * Predstavlja model tabele za klasu Serviser. Nasledjuje apstraktni model tabele i imeplementira njegove metode.
+ * Predstavlja model tabele za klasu {@link Korisnik}. Nasledjuje apstraktni model tabele i imeplementira njegove metode.
  * 
- * Ima listu svih uloganih servisera koji ce se prikazati u tabeli kao i metode za dodavanje 
- * i brisanje servisera iz ove liste.
+ * Ima listu svih uloganih korisnika koji ce se prikazati u tabeli kao i metode za dodavanje 
+ * i brisanje korisnika iz ove liste.
  * 
  * @see AbstractTableModel
  * @author Luka Obrenic
  */
-public class TableModelServiser extends AbstractTableModel{
-	/**
-	 * Lista svih ulogovanih servisera kao lista tipa Serviser.
-	 * @see Korisnik
-	 */
-    List<Korisnik> ulogovaniServiseri;
+public class TableModelKorisnik extends AbstractTableModel{
+    
+    /**
+     * Lista svih ulogovanih korisnika kao lista tipa {@link Korisnik}.
+     * @see Korisnik
+     */
+    List<Korisnik> ulogovaniKorisnici;
     /**
      * Nazivi kolona tabele kao niz stringova.
      */
     String[] naziviKolona = {"Ime", "Prezime"};
 
     /**
-     * Neparametrizovani konstruktor koji inicijalizuje listu ulogovanih servisera,
+     * Neparametrizovani konstruktor koji inicijalizuje listu ulogovanih korisnika
      */
-    public TableModelServiser() {
-        ulogovaniServiseri = new ArrayList<>();
+    public TableModelKorisnik() {
+        ulogovaniKorisnici = new ArrayList<>();
     }
     
     
     @Override
     public int getRowCount() {
-        return ulogovaniServiseri.size();
+        return ulogovaniKorisnici.size();
     }
 
     @Override
@@ -50,7 +51,7 @@ public class TableModelServiser extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Korisnik s = ulogovaniServiseri.get(rowIndex);
+        Korisnik s = ulogovaniKorisnici.get(rowIndex);
         
         switch(columnIndex){
             case 0: return s.getIme();
@@ -65,22 +66,22 @@ public class TableModelServiser extends AbstractTableModel{
     }
     
     /**
-     * Dodaje servisera u listu ulogovanih servisera i osvezava prikaz tabele na grafickoj formi.
+     * Dodaje korisnika u listu ulogovanih korisnika i osvezava prikaz tabele na grafickoj formi.
      * 
-     * @param s serviser koji se ulogovao
+     * @param k korisnik koji se ulogovao
      */
-    public void dodajServisera(Korisnik s){
-        ulogovaniServiseri.add(s);
+    public void dodajKorisnika(Korisnik k){
+        ulogovaniKorisnici.add(k);
         fireTableDataChanged();
     }
 
     /**
-     * Brise servisera iz liste ulogovanih servisera i osvezava prikaz tabele na grafickoj formi.
+     * Brise korisnika iz liste ulogovanih korisnika i osvezava prikaz tabele na grafickoj formi.
      * 
-     * @param ulogovaniServiser koji se izlogovao
+     * @param ulogovaniKorisnik koji se izlogovao
      */
-    public void obrisiServisera(Korisnik ulogovaniServiser) {
-        ulogovaniServiseri.remove(ulogovaniServiser);
+    public void obrisiKorisnika(Korisnik ulogovaniKorisnik) {
+        ulogovaniKorisnici.remove(ulogovaniKorisnik);
         fireTableDataChanged();
     }
     

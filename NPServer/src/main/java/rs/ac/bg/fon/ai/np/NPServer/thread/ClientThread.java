@@ -35,10 +35,10 @@ import rs.ac.bg.fon.ai.np.NPServer.server.Server;
  */
 public class ClientThread extends Thread {
 
-	/**
-	 * Socket za komunikaciju sa klijentom tipa Socket.
-	 * @see Socket
-	 */
+    /**
+     * Socket za komunikaciju sa klijentom tipa Socket.
+     * @see Socket
+     */
     private final Socket clientSocket;
     /**
      * Posiljaoc odgovora (Response-a) nazad do klijenta tipa Sender.
@@ -58,11 +58,11 @@ public class ClientThread extends Thread {
      */
     private Controller controller;
     /**
-     * Objekat servisera koja se dodeljuje klijentskoj niti kako bi se znalo da je taj serviser ulgovan kao
+     * Korisnik koji se dodeljuje klijentskoj niti kako bi se znalo da je taj korisnik ulgovan kao
      * i njegovi podaci.
      * @see Korisnik
      */
-    private Korisnik ulogovaniServiser;
+    private Korisnik ulogovaniKorisnik;
     /**
      * Referenca ka serveru tipa Server.
      * @see Server
@@ -114,8 +114,8 @@ public class ClientThread extends Thread {
                                 Korisnik serviser = (Korisnik) request.getArgument();
                                 if (server.nijeUlogovan(serviser)) {
                                     response.setResult(controller.login(serviser));
-                                    this.ulogovaniServiser = serviser;
-                                    server.dodajServiseraUTabelu(this.ulogovaniServiser);
+                                    this.ulogovaniKorisnik = serviser;
+                                    server.dodajServiseraUTabelu(this.ulogovaniKorisnik);
                                 } else {
                                     throw new Exception("User je vec prijavljen.");
                                 }
@@ -237,12 +237,12 @@ public class ClientThread extends Thread {
     }
 
     /**
-     * Vraca ulogvanog servisera kao Serviser.
+     * Vraca ulogvanog korisnika kao Serviser.
      * @see Korisnik
-     * @return instancu ulogovanog servisera tipa Serviser
+     * @return instancu ulogovanog korisnika tipa {@link Korisnik}.
      */
-    public Korisnik getUlogovaniServiser() {
-        return this.ulogovaniServiser;
+    public Korisnik getUlogovaniKorisnik() {
+        return this.ulogovaniKorisnik;
     }
 
     /**

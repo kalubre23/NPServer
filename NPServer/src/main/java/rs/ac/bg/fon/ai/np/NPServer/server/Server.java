@@ -31,9 +31,9 @@ import rs.ac.bg.fon.ai.np.NPServer.ui.form.FrmServer;
  */
 public class Server extends Thread {
 
-	/**
-	 * Serverski socket tipa ServerSocket.
-	 */
+    /**
+     * Serverski socket tipa ServerSocket.
+     */
     private ServerSocket serverSocket;
     /**
      * Lista klijentskih niti kao lista tipa ClientThread.
@@ -104,22 +104,22 @@ public class Server extends Thread {
     }
 
     /**
-     * Proverava da li je serviser ulogovan.
+     * Proverava da li je korisnik ulogovan.
      * 
-     * Serviser je ulogovan ako je dodeljen klijentskoj niti.
-     * Prolazi kroz sve klijentske niti i vraca da li je serviser vec dodeljen nekoj 
+     * Korisnik je ulogovan ako je dodeljen klijentskoj niti.
+     * Prolazi kroz sve klijentske niti i vraca da li je korisnik vec dodeljen nekoj 
      * odnosno da li je trenutno ulogovan.
      * 
-     * @param serviser za koga treba proveriti da li je ulogovan
+     * @param korisnik za koga treba proveriti da li je ulogovan
      * @return
      * <ul> 
-     * 		<li> true ako serviser nije ulogovan tj nije dodeljen klijentskoj niti</li>
-     * 		<li> false ako je serviser vec ulogovan tj dodeljen nekoj klijentskoj niti</li>
+     * 		<li> true ako korisnik nije ulogovan tj nije dodeljen klijentskoj niti</li>
+     * 		<li> false ako je korisnik vec ulogovan tj dodeljen nekoj klijentskoj niti</li>
      * </ul>
      */
-    public boolean nijeUlogovan(Korisnik serviser) {
+    public boolean nijeUlogovan(Korisnik korisnik) {
         for (ClientThread client : clients) {
-            if (serviser.equals(client.getUlogovaniServiser())) {
+            if (korisnik.equals(client.getUlogovaniKorisnik())) {
                 return false;
             }
         }
@@ -143,22 +143,22 @@ public class Server extends Thread {
     }
 
     /**
-     * Povezuje serverski GUI sa klijentskom niti. Prosledjuje ulogovanog servisera
+     * Povezuje serverski GUI sa klijentskom niti. Prosledjuje ulogovanog korisnika
      * serverskoj grafickoj formi.
-     * @param ulogovaniServiser koji se dodaje serverskoj formi
+     * @param ulogovaniKorisnik koji se dodaje serverskoj formi
      */
-    public void dodajServiseraUTabelu(Korisnik ulogovaniServiser) {
-        sf.dodajServisera(ulogovaniServiser);
+    public void dodajServiseraUTabelu(Korisnik ulogovaniKorisnik) {
+        sf.dodajKorisnika(ulogovaniKorisnik);
     }
 
     /**
-     * Izbacuje klijentsku nit iz liste klijentskih niti. Takodje prosledjuje ulogovanog servisera
+     * Izbacuje klijentsku nit iz liste klijentskih niti. Takodje prosledjuje ulogovanog korisnika
      * te klijentske niti serverskoj formi.
      * 
-     * @param clientThread koju treba izbaciti iz liste klijentskih niti i proslediti instancu servisera iz nje serverskoj formi
+     * @param clientThread koju treba izbaciti iz liste klijentskih niti i proslediti instancu korisnika iz nje serverskoj formi
      */
     public void izbaciClientThread(ClientThread clientThread) {
         clients.remove(clientThread);
-        sf.obrisiServiseraIzTabele(clientThread.getUlogovaniServiser());
+        sf.obrisiKorisnikaIzTabele(clientThread.getUlogovaniKorisnik());
     }
 }

@@ -9,25 +9,24 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Korisnik;
 import rs.ac.bg.fon.ai.np.NPServer.server.Server;
-import rs.ac.bg.fon.ai.np.NPServer.ui.components.TableModelServiser;
+import rs.ac.bg.fon.ai.np.NPServer.ui.components.TableModelKorisnik;
 
 
 /**
- * Glavna serverska graficka forma na kojoj se pokrece/zaustavlja server i prikazuju svi ulogovani serviseri.
+ * Glavna serverska graficka forma na kojoj se pokrece/zaustavlja server i prikazuju svi ulogovani korisnici.
  * 
  * @author Luka Obrenic
  * @since 1.0.0
  */
 public class FrmServer extends javax.swing.JFrame {
 
-	/**
-	 * Referenca ka serveru tipa Server.
-	 * @see Server
-	 */
+    /**
+     * Referenca ka serveru tipa Server.
+     * @see Server
+     */
     private Server server;
     /**
      * Broj porta servera.
@@ -114,7 +113,7 @@ public class FrmServer extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("Ulogovani serviseri");
+        jLabel2.setText("Ulogovani korisnici");
 
         tblServiseri.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -327,7 +326,7 @@ public class FrmServer extends javax.swing.JFrame {
         lblStatusServera.setForeground(Color.red);
         btnZaustaviServer.setEnabled(false);
         
-        tblServiseri.setModel(new TableModelServiser());
+        tblServiseri.setModel(new TableModelKorisnik());
     }
 
     /**
@@ -361,23 +360,23 @@ public class FrmServer extends javax.swing.JFrame {
     }
 
     /**
-     * Dodaje servisera u listu svih ulogovanih servisera u table modelu.
+     * Dodaje korisnika u listu svih ulogovanih korisnika u table modelu.
      * 
-     * @param ulogovaniServiser koji se dodaje u tabelu, tipa Serviser.
+     * @param ulogovaniKorisnik koji se dodaje u tabelu, tipa {@link Korisnik}.
      * @see Korisnik
      */
-    public void dodajServisera(Korisnik ulogovaniServiser) {
-        ((TableModelServiser)tblServiseri.getModel()).dodajServisera(ulogovaniServiser);
+    public void dodajKorisnika(Korisnik ulogovaniKorisnik) {
+        ((TableModelKorisnik)tblServiseri.getModel()).dodajKorisnika(ulogovaniKorisnik);
     }
 
     /**
-     * Brise servisera iz liste svih ulogovanih servisera u table modelu.
+     * Brise korisnika iz liste svih ulogovanih korisnika u table modelu.
      * 
      * @param ulogovaniServiser koji se brise iz tabele, tipa Serviser.
      * @see Korisnik
      */
-    public void obrisiServiseraIzTabele(Korisnik ulogovaniServiser) {
-        ((TableModelServiser)tblServiseri.getModel()).obrisiServisera(ulogovaniServiser);
+    public void obrisiKorisnikaIzTabele(Korisnik ulogovaniKorisnik) {
+        ((TableModelKorisnik)tblServiseri.getModel()).obrisiKorisnika(ulogovaniKorisnik);
     }
 
     private void handleServerConfig() {

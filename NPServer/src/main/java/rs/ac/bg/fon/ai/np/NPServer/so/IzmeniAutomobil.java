@@ -21,10 +21,10 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.UoceniKvar;
  */
 public class IzmeniAutomobil extends AbstractSO {
 
-	/**
-	 * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
-	 * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
-	 */
+    /**
+     * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
+     * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
+     */
     public IzmeniAutomobil() throws Exception {
         super();
     }
