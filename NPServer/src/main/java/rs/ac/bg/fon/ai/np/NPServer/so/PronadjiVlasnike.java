@@ -18,10 +18,10 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.Vlasnik;
  */
 public class PronadjiVlasnike extends AbstractSO{
     
-	/**
-	 * Lista vlasnika koji zadovoljavaju kriterijum pretrage.
-	 * @see Vlasnik
-	 */
+    /**
+     * Lista vlasnika koji zadovoljavaju kriterijum pretrage.
+     * @see Vlasnik
+     */
     List<Vlasnik> listaVlasnika;
 
     /**
@@ -37,8 +37,8 @@ public class PronadjiVlasnike extends AbstractSO{
 	 * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
 	 * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
 	 */
-    public PronadjiVlasnike() throws Exception {
-        super();
+    public PronadjiVlasnike(boolean test) throws Exception {
+        super(test);
     }
     
     /**

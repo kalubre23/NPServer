@@ -30,6 +30,9 @@ public class DatabaseConnection {
 	 * Lista konekcija kao lista tipa Connection.
 	 */
 	private List<Connection> connectionPool;
+        
+        
+        private Connection testConnection;
 	/**
 	 * Atribut tipa DatabaseConnection za implementaciju singleton paterna.
 	 */
@@ -40,22 +43,30 @@ public class DatabaseConnection {
 	 * 
 	 * Inicijalizuje listu konekcija, inicijalizuje 10 konekcija i dodaje ih u tu
 	 * listu.
+         * 
+         * @param test true ako se vraca konekcija ka bazi za testiranje aplikacije
 	 * 
 	 * @throws Exception ukoliko dodje do greske pri inicijalizaciji konekcije ka
 	 * bazi
 	 */
-	private DatabaseConnection() throws Exception {
-		connectionPool = new ArrayList<>();
-		for (int i = 0; i < 10; i++) {
-			try {
-				Connection connection = getConnection();
-				connectionPool.add(connection);
-			} catch (Exception ex) {
-				System.out.println("Greska! Konekcija sa bazom nije uspesno uspostavljena!\n" + ex.getMessage());
-				ex.printStackTrace();
-				throw ex;
-			}
-		}
+	private DatabaseConnection(boolean test) throws Exception {
+            if(!test){
+                //inicijalizovace se standardni conn pool
+                connectionPool = new ArrayList<>();
+                for (int i = 0; i < 10; i++) {
+                    try {
+                        Connection connection = getConnection(test);
+                        connectionPool.add(connection);
+                    } catch (Exception ex) {
+                        System.out.println("Greska! Konekcija sa bazom nije uspesno uspostavljena!\n" + ex.getMessage());
+                        ex.printStackTrace();
+                        throw ex;
+                    }
+                }
+            }else {
+                //inicijalizuj test konekciju
+                testConnection = getConnection(test);
+            }
 	}
 
 	/**
@@ -63,16 +74,18 @@ public class DatabaseConnection {
 	 * 
 	 * Vraca jedinu instancu ove klase. Ukoliko je ona null prvo ce se
 	 * inicijalizovati.
+         * 
+         * @param test true ako se vraca konekcija ka bazi za testiranje aplikacije
 	 * 
 	 * @return instanca ove klase
 	 * @throws SQLException izuzetak koji baca ukoliko ga baci poziv konstruktora
 	 *                      DatabaseConnection()
 	 */
-	public static DatabaseConnection getInstance() throws Exception {
-		if (instance == null) {
-			instance = new DatabaseConnection();
-		}
-		return instance;
+	public static DatabaseConnection getInstance(boolean test) throws Exception {
+            if (instance == null) {
+                instance = new DatabaseConnection(test);
+            }
+            return instance;
 	}
 
 	/**
@@ -106,30 +119,46 @@ public class DatabaseConnection {
 
 	/**
 	 * Vraca konekciju cije parametre ucitava iz json fajla.
+         * 
+         * @param test true ako se vraca konekcija ka bazi za testiranje aplikacije
+         * 
 	 * @return connection koja povezuje aplikaciju sa bazom, tipa Connection
 	 * @throws Exception ako dodje do greske pri ucitavanju json fajla ili inicijalizacije konekcije
 	 */
-	private Connection getConnection() throws Exception {
+	private Connection getConnection(boolean test) throws Exception {
 
-		Connection connection;
+            Connection connection;
 
-		try (FileReader fr = new FileReader("./src/main/java/resources/dbconfig.json")) {
-			Gson gson = new Gson();
+            try (FileReader fr = new FileReader("./src/main/java/resources/dbconfig.json")) {
+                Gson gson = new Gson();
 
-			JsonObject jsonObject = gson.fromJson(fr, JsonObject.class);
+                JsonObject jsonObject = gson.fromJson(fr, JsonObject.class);
+                String url = null;
+                if(test){
+                    url = jsonObject.get("url_test").getAsString();
+                } else {
+                    url = jsonObject.get("url").getAsString();
+                    
+                }
+                String username = jsonObject.get("username").getAsString();
+                String password = jsonObject.get("password").getAsString();
 
-			String url = jsonObject.get("url").getAsString();
-			String username = jsonObject.get("username").getAsString();
-			String password = jsonObject.get("password").getAsString();
-
-			connection = DriverManager.getConnection(url, username, password);
-			System.out.println("Konekcija sa bazom podataka uspesno uspostavljena!");
-			connection.setAutoCommit(false);
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw e;
-		}
-		return connection;
+                connection = DriverManager.getConnection(url, username, password);
+                System.out.println("Konekcija sa bazom podataka uspesno uspostavljena!");
+                connection.setAutoCommit(false);
+            } catch (IOException e) {
+                    e.printStackTrace();
+                    throw e;
+            }
+            return connection;
 	}
+        
+        public Connection getTestConnection() throws Exception{
+            return this.testConnection;
+        }
+        
+        public void closeConnection() throws SQLException{
+            this.testConnection.close();
+        }
 
 }

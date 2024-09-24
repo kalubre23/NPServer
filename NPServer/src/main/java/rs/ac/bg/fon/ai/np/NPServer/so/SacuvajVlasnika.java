@@ -17,12 +17,12 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.Vlasnik;
  */
 public class SacuvajVlasnika extends AbstractSO{
 
-	/**
-	 * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
-	 * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
-	 */
-    public SacuvajVlasnika() throws Exception {
-        super();
+    /**
+     * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
+     * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
+     */
+    public SacuvajVlasnika(boolean test) throws Exception {
+        super(test);
     }
     
 

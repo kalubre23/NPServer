@@ -22,13 +22,15 @@ import rs.ac.bg.fon.ai.np.NPServer.db.DatabaseConnection;
  */
 public abstract class AbstractSO {
 
-	/**
-	 * Referenca ka database brokeru tipa DatabaseBroker.
-	 * @see DatabaseBroker
-	 *
-	 */
+    /**
+     * Referenca ka database brokeru tipa DatabaseBroker.
+     * @see DatabaseBroker
+     *
+     */
     protected DatabaseBroker databaseBroker;
 
+    protected boolean test = false;
+    
     /**
      * Neparametrizovani konstruktor koji inicijalizuje database broker-a.
      * 
@@ -36,8 +38,13 @@ public abstract class AbstractSO {
      * @see DatabaseConnection
      * @throws Exception ako dodje do greske pri inicijalizaciji
      */
-    public AbstractSO() throws Exception {
-        databaseBroker = new DatabaseBroker(DatabaseConnection.getInstance().pop());
+    public AbstractSO(boolean test) throws Exception {
+        this.test = test;
+        if(test){
+            databaseBroker = new DatabaseBroker(DatabaseConnection.getInstance(true).getTestConnection());
+        }else {  
+            databaseBroker = new DatabaseBroker(DatabaseConnection.getInstance(false).pop());
+        }
     }
 
     /**
@@ -59,7 +66,11 @@ public abstract class AbstractSO {
             throw ex;
         } finally {
             //valjda kad sam zavrsio sistemsku op treba da vratim konekciju
-            DatabaseConnection.getInstance().push(databaseBroker.getConnection());
+            if(!this.test){   
+                DatabaseConnection.getInstance(false).push(databaseBroker.getConnection());
+            }else {
+                //DatabaseConnection.getInstance(false).closeConnection();
+            }
         }
     }
 

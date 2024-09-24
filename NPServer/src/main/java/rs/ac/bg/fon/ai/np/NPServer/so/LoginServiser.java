@@ -8,21 +8,41 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.DomenskiObjekat;
 import rs.ac.bg.fon.ai.np.NPCommon.domain.Korisnik;
 
 /**
+ * Predstavlja konkretnu sistemsku operaciju za login korisnika. Nasledjuje 
+ * opstu sistemsku operaciju.
  *
- * @author student2
+ * @see AbstractSO
+ * @author Luka Obrenic
+ * @since 1.1.0
  */
 public class LoginServiser extends AbstractSO {
 
+    /**
+     * Korisnik koji se loguje, tipa {@link Korisnik}.
+     */
     private Korisnik serviser;
 
-    public LoginServiser() throws Exception {
-        super();
+    /**
+     * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
+     * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
+    */
+    public LoginServiser(boolean test) throws Exception {
+        super(test);
     }
 
+    /**
+     * Vraca ulogovanog korisnika.
+     * @return ulogovani korisnik, tipa {@link Korisnik}
+     */
     public Korisnik getServiser() {
         return serviser;
     }
 
+    /**
+     * Konkretna implementacija sistemske operacije za login korisnika.
+     * 
+     * Poziva se metoda database brokera koja vraca korisnika iz baze.
+     */
     @Override
     protected void executeOperation(DomenskiObjekat object) throws Exception {
         serviser = (Korisnik) databaseBroker.vratiJednog(object);
@@ -32,6 +52,11 @@ public class LoginServiser extends AbstractSO {
         }
     }
 
+    /**
+     * Vrsi validaciju.
+     * 
+     * Objekat mora biti instanca klase Korisnik.
+     */
     @Override
     protected void validate(DomenskiObjekat object) throws Exception {
         if (!(object instanceof Korisnik)) {

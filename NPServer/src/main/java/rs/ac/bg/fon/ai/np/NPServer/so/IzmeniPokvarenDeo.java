@@ -17,12 +17,12 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.PokvareniDeo;
  */
 public class IzmeniPokvarenDeo extends AbstractSO {
 
-	/**
-	 * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
-	 * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
-	 */
-    public IzmeniPokvarenDeo() throws Exception {
-        super();
+    /**
+     * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
+     * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
+     */
+    public IzmeniPokvarenDeo(boolean test) throws Exception {
+        super(test);
     }
     
     /**

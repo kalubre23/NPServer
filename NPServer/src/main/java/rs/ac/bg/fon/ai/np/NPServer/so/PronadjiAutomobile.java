@@ -39,8 +39,8 @@ public class PronadjiAutomobile extends AbstractSO {
 	 * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
 	 * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
 	 */
-    public PronadjiAutomobile() throws Exception {
-        super();
+    public PronadjiAutomobile(boolean test) throws Exception {
+        super(true);
     }
 
     /**
@@ -50,7 +50,7 @@ public class PronadjiAutomobile extends AbstractSO {
      * prosledjuje joj se automobil koji sluzi kao kriterijum pretrage.
      */
     @SuppressWarnings("unchecked")
-	@Override
+    @Override
     protected void executeOperation(DomenskiObjekat object) throws Exception {
         automobili = (List<Automobil>)(Object)databaseBroker.vratiViseSlozenihSaUslovom(object);
         

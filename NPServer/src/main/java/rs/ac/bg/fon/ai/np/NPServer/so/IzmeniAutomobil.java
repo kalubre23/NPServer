@@ -25,8 +25,8 @@ public class IzmeniAutomobil extends AbstractSO {
      * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
      * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
      */
-    public IzmeniAutomobil() throws Exception {
-        super();
+    public IzmeniAutomobil(boolean test) throws Exception {
+        super(test);
     }
 
     /**

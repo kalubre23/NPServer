@@ -21,8 +21,8 @@ public class IzmeniVlasnika extends AbstractSO{
 	 * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
 	 * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
 	 */
-    public IzmeniVlasnika() throws Exception {
-        super();
+    public IzmeniVlasnika(boolean test) throws Exception {
+        super(test);
     }
     
     

@@ -20,11 +20,12 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.DomenskiObjekat;
  * @since 1.0.0
  */
 public class UcitajListuDelovaAutomobila extends AbstractSO {
-	/**
-	 * Lista svih delova automobila.
-	 * @see DeoAutomobila
-	 */
+    /**
+     * Lista svih delova automobila.
+     * @see DeoAutomobila
+     */
     List<DeoAutomobila> deloviAutomobila;
+    
 
     /**
      * Vraca listu svih delova automobila.
@@ -35,10 +36,11 @@ public class UcitajListuDelovaAutomobila extends AbstractSO {
     }
     
     /**
-	 * Neparametrizovani konstruktor koji inicijalizuje listu svih delova automobila.
-	 * @throws Exception ako dodje do greske
-	 */
-    public UcitajListuDelovaAutomobila() throws Exception {
+     * Neparametrizovani konstruktor koji inicijalizuje listu svih delova automobila.
+     * @throws Exception ako dodje do greske
+     */
+    public UcitajListuDelovaAutomobila(boolean test) throws Exception {
+        super(test);
         deloviAutomobila = new ArrayList<>();
     }
     

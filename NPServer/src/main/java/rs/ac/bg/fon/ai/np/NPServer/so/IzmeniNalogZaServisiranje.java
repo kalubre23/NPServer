@@ -21,8 +21,8 @@ public class IzmeniNalogZaServisiranje extends AbstractSO{
      * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
      * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
      */
-    public IzmeniNalogZaServisiranje() throws Exception {
-        super();
+    public IzmeniNalogZaServisiranje(boolean test) throws Exception {
+        super(test);
     }
 
     /**

@@ -21,12 +21,12 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.UoceniKvar;
  */
 public class SacuvajAutomobil extends AbstractSO {
 
-	/**
-	 * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
-	 * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
-	 */
-    public SacuvajAutomobil() throws Exception {
-        super();
+    /**
+     * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
+     * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
+     */
+    public SacuvajAutomobil(boolean test) throws Exception {
+        super(test);
     }
 
     /**

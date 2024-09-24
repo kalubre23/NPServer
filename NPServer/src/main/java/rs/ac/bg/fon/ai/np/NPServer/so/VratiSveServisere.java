@@ -20,8 +20,8 @@ public class VratiSveServisere extends AbstractSO{
         return listaServisera;
     }
 
-    public VratiSveServisere() throws Exception {
-        super();
+    public VratiSveServisere(boolean test) throws Exception {
+        super(test);
     }
     
     

@@ -38,8 +38,8 @@ public class UcitajListuMarki extends AbstractSO {
 	 * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
 	 * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
 	 */
-    public UcitajListuMarki() throws Exception {
-        super();
+    public UcitajListuMarki(boolean test) throws Exception {
+        super(test);
     }
 
     /**

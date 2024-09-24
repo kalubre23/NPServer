@@ -17,12 +17,12 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.NalogZaServisiranje;
  */
 public class SacuvajNalogZaServisiranje extends AbstractSO {
 
-	/**
-	 * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
-	 * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
-	 */
-    public SacuvajNalogZaServisiranje() throws Exception {
-        super();
+    /**
+     * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
+     * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
+     */
+    public SacuvajNalogZaServisiranje(boolean test) throws Exception {
+        super(test);
     }
     
 

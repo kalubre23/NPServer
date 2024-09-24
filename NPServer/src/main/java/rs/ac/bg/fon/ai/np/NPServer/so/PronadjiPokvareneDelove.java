@@ -38,8 +38,8 @@ public class PronadjiPokvareneDelove extends AbstractSO {
 	 * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
 	 * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
 	 */
-    public PronadjiPokvareneDelove() throws Exception {
-        super();
+    public PronadjiPokvareneDelove(boolean test) throws Exception {
+        super(test);
     }
     
 

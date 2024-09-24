@@ -45,6 +45,17 @@ import rs.ac.bg.fon.ai.np.NPServer.so.VratiSveServisere;
  */
 public class Controller {
 
+    boolean test=false;
+    
+    public Controller() {
+    }
+    
+    public Controller(boolean test) {
+        this.test = test;
+    }
+    
+
+    
     /**
      * Poziva sistemsku operaciju za logovanje servisera u sistem.
      * 
@@ -55,7 +66,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public Korisnik login(Korisnik serviser) throws Exception {
-        LoginServiser loginServiser = new LoginServiser();
+        LoginServiser loginServiser = new LoginServiser(this.test);
         // User u= loginUser.execute(user);
         loginServiser.execute(serviser);
         return loginServiser.getServiser();
@@ -70,7 +81,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public List<Marka> ucitajListuMarki() throws Exception {
-        UcitajListuMarki ucitajListuMarki = new UcitajListuMarki();
+        UcitajListuMarki ucitajListuMarki = new UcitajListuMarki(this.test);
         ucitajListuMarki.execute(new Marka());
         return ucitajListuMarki.getListaMarki();
     }
@@ -82,7 +93,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public void sacuvajAutomobil(Automobil automobil) throws Exception {
-        SacuvajAutomobil sacuvajAutomobil = new SacuvajAutomobil();
+        SacuvajAutomobil sacuvajAutomobil = new SacuvajAutomobil(this.test);
         sacuvajAutomobil.execute(automobil);
     }
     
@@ -96,7 +107,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public List<Automobil> pronadjiAutomobile(Automobil automobil) throws Exception{
-        PronadjiAutomobile pronadjiAutomobile = new PronadjiAutomobile();
+        PronadjiAutomobile pronadjiAutomobile = new PronadjiAutomobile(this.test);
         pronadjiAutomobile.execute(automobil);
         return pronadjiAutomobile.getAutomobili();
     }
@@ -108,7 +119,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public void izmeniAutomobil(Automobil automobil) throws Exception{
-        IzmeniAutomobil izmeniAutomobil = new IzmeniAutomobil();
+        IzmeniAutomobil izmeniAutomobil = new IzmeniAutomobil(this.test);
         izmeniAutomobil.execute(automobil);
     }
 
@@ -119,7 +130,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public void obrisiAutomobil(Automobil automobilBrisanje) throws Exception {
-        ObrisiAutomobil obrisiAutomobil = new ObrisiAutomobil();
+        ObrisiAutomobil obrisiAutomobil = new ObrisiAutomobil(this.test);
         obrisiAutomobil.execute(automobilBrisanje);
     }
 
@@ -132,7 +143,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public Object ucitajListuDelovaAutomobila() throws Exception {
-        UcitajListuDelovaAutomobila ucitajListuDelovaAutomobila = new UcitajListuDelovaAutomobila();
+        UcitajListuDelovaAutomobila ucitajListuDelovaAutomobila = new UcitajListuDelovaAutomobila(this.test);
         ucitajListuDelovaAutomobila.execute(new DeoAutomobila());
         return ucitajListuDelovaAutomobila.getDeloviAutomobila();
     }
@@ -144,7 +155,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public void sacuvajPokvarenDeo(List<PokvareniDeo> listaDelova) throws Exception {
-        SacuvajPokvarenDeo sacuvajPokvarenDeo = new SacuvajPokvarenDeo();
+        SacuvajPokvarenDeo sacuvajPokvarenDeo = new SacuvajPokvarenDeo(this.test);
         for(PokvareniDeo d : listaDelova){ 
             System.out.println(d);
             sacuvajPokvarenDeo.execute(d);
@@ -162,7 +173,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public List<PokvareniDeo> pronadjiPokvareneDelove(PokvareniDeo pd) throws Exception {
-        PronadjiPokvareneDelove pronadjiPokvareneDelove = new PronadjiPokvareneDelove();
+        PronadjiPokvareneDelove pronadjiPokvareneDelove = new PronadjiPokvareneDelove(this.test);
         pronadjiPokvareneDelove.execute(pd);
         return pronadjiPokvareneDelove.getListaPokvarenihDelova();
     }
@@ -174,7 +185,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public void izmeniPokvarenDeo(PokvareniDeo pdIzmena) throws Exception {
-        IzmeniPokvarenDeo izmeniPokvarenDeo = new IzmeniPokvarenDeo();
+        IzmeniPokvarenDeo izmeniPokvarenDeo = new IzmeniPokvarenDeo(this.test);
         izmeniPokvarenDeo.execute(pdIzmena);
     }
 
@@ -185,7 +196,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public void obrisiPokvarenDeo(PokvareniDeo pdBrisanje) throws Exception {
-        ObrisiPokvarenDeo obrisiPokvarenDeo = new ObrisiPokvarenDeo();
+        ObrisiPokvarenDeo obrisiPokvarenDeo = new ObrisiPokvarenDeo(test);
         obrisiPokvarenDeo.execute(pdBrisanje);
         
     }
@@ -197,7 +208,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public void sacuvajNalogZaServisiranje(NalogZaServisiranje nalogZaServisiranje) throws Exception {
-        SacuvajNalogZaServisiranje sacuvajNalogZaServisiranje = new SacuvajNalogZaServisiranje();
+        SacuvajNalogZaServisiranje sacuvajNalogZaServisiranje = new SacuvajNalogZaServisiranje(this.test);
         sacuvajNalogZaServisiranje.execute(nalogZaServisiranje);
     }
 
@@ -211,7 +222,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public List<NalogZaServisiranje> pronadjiNalogeZaServisiranje(NalogZaServisiranje nalogPretraga) throws Exception {
-        PronadjiNalogeZaServisiranje pronadjiNalogeZaServisiranje = new PronadjiNalogeZaServisiranje();
+        PronadjiNalogeZaServisiranje pronadjiNalogeZaServisiranje = new PronadjiNalogeZaServisiranje(this.test);
         pronadjiNalogeZaServisiranje.execute(nalogPretraga);
         return pronadjiNalogeZaServisiranje.getListaNaloga();
     }
@@ -223,7 +234,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public void obrisiNalog(NalogZaServisiranje nalogBrisanje) throws Exception {
-        ObrisiNalogZaServisiranje obrisiNalogZaServisiranje = new ObrisiNalogZaServisiranje();
+        ObrisiNalogZaServisiranje obrisiNalogZaServisiranje = new ObrisiNalogZaServisiranje(this.test);
         obrisiNalogZaServisiranje.execute(nalogBrisanje);
     }
 
@@ -234,7 +245,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public void sacuvajVlasnika(Vlasnik vlasnikDodaj) throws Exception {
-        SacuvajVlasnika sacuvajVlasnika = new SacuvajVlasnika();
+        SacuvajVlasnika sacuvajVlasnika = new SacuvajVlasnika(this.test);
         sacuvajVlasnika.execute(vlasnikDodaj);
     }
 
@@ -248,7 +259,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public List<Vlasnik> pronadjiVlasnike(Vlasnik vlasnikPretraga) throws Exception {
-        PronadjiVlasnike pronadjiVlasnike = new PronadjiVlasnike();
+        PronadjiVlasnike pronadjiVlasnike = new PronadjiVlasnike(this.test);
         pronadjiVlasnike.execute(vlasnikPretraga);
         return pronadjiVlasnike.getListaVlasnika();
     }
@@ -260,7 +271,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public void izmeniVlasnika(Vlasnik vlasnikIzmena) throws Exception {
-        IzmeniVlasnika izmeniVlasnika = new IzmeniVlasnika();
+        IzmeniVlasnika izmeniVlasnika = new IzmeniVlasnika(this.test);
         izmeniVlasnika.execute(vlasnikIzmena);
     }
 
@@ -271,7 +282,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public void obrisiVlasnika(Vlasnik vlasnikBrisanje) throws Exception {
-        ObrisiVlasnika obrisiVlasnika = new ObrisiVlasnika();
+        ObrisiVlasnika obrisiVlasnika = new ObrisiVlasnika(this.test);
         obrisiVlasnika.execute(vlasnikBrisanje);
     }
 
@@ -281,7 +292,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public List<Korisnik> vratiSveServisere() throws Exception {
-        VratiSveServisere vratiSveServisere = new VratiSveServisere();
+        VratiSveServisere vratiSveServisere = new VratiSveServisere(this.test);
         vratiSveServisere.execute(new Korisnik());
         return vratiSveServisere.getListaServisera();
     }
@@ -292,7 +303,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public void izmeniNalog(NalogZaServisiranje nalogIzmena) throws Exception {
-        IzmeniNalogZaServisiranje izmeniNalogZaServisiranje = new IzmeniNalogZaServisiranje();
+        IzmeniNalogZaServisiranje izmeniNalogZaServisiranje = new IzmeniNalogZaServisiranje(this.test);
         izmeniNalogZaServisiranje.execute(nalogIzmena);
     }
 }
