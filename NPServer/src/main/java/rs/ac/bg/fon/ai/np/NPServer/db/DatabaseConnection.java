@@ -83,6 +83,7 @@ public class DatabaseConnection {
 	 */
 	public static DatabaseConnection getInstance(boolean test) throws Exception {
             if (instance == null) {
+                System.out.println("Kreira se instanca dbconn"+test);
                 instance = new DatabaseConnection(test);
             }
             return instance;
@@ -114,6 +115,10 @@ public class DatabaseConnection {
 		}
 		Connection connection = connectionPool.get(0);
 		connectionPool.remove(0);
+                System.out.println("Connection pool duzina:"+connectionPool.size());
+                if(connection == null){
+                    System.out.println("KOnekcija u DatabaseConnection u pop je null");
+                }
 		return connection;
 	}
 

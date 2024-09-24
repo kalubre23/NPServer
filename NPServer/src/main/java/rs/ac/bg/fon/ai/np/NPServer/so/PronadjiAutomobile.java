@@ -40,7 +40,7 @@ public class PronadjiAutomobile extends AbstractSO {
 	 * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
 	 */
     public PronadjiAutomobile(boolean test) throws Exception {
-        super(true);
+        super(test);
     }
 
     /**

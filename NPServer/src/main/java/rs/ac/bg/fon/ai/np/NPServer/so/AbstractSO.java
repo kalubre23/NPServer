@@ -40,9 +40,10 @@ public abstract class AbstractSO {
      */
     public AbstractSO(boolean test) throws Exception {
         this.test = test;
-        if(test){
+        if(this.test){
             databaseBroker = new DatabaseBroker(DatabaseConnection.getInstance(true).getTestConnection());
         }else {  
+            System.out.println("POZIVA SE pop U abstract SO");
             databaseBroker = new DatabaseBroker(DatabaseConnection.getInstance(false).pop());
         }
     }
@@ -68,8 +69,6 @@ public abstract class AbstractSO {
             //valjda kad sam zavrsio sistemsku op treba da vratim konekciju
             if(!this.test){   
                 DatabaseConnection.getInstance(false).push(databaseBroker.getConnection());
-            }else {
-                //DatabaseConnection.getInstance(false).closeConnection();
             }
         }
     }

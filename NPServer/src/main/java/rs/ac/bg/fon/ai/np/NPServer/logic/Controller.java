@@ -196,7 +196,7 @@ public class Controller {
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
     public void obrisiPokvarenDeo(PokvareniDeo pdBrisanje) throws Exception {
-        ObrisiPokvarenDeo obrisiPokvarenDeo = new ObrisiPokvarenDeo(test);
+        ObrisiPokvarenDeo obrisiPokvarenDeo = new ObrisiPokvarenDeo(this.test);
         obrisiPokvarenDeo.execute(pdBrisanje);
         
     }
