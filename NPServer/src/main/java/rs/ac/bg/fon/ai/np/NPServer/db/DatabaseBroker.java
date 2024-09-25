@@ -131,7 +131,7 @@ public class DatabaseBroker {
      * @param object objekat domenske klase koji je potrebno sacuvati.
      * @throws SQLException izuzetak ukoliko je doslo do greske pri interakciji sa bazom
      */
-    public void sacuvaj(DomenskiObjekat object) throws SQLException {
+    public DomenskiObjekat sacuvaj(DomenskiObjekat object) throws SQLException {
         try {
             String upit = "INSERT INTO " + object.vratiNazivTabele() + "(" + object.getKoloneZaInsert() + ")" + " VALUES " + "(" + object.vratiVrednostiZaInsert() + ")";
             System.out.println("Upit: " + upit);
@@ -153,6 +153,7 @@ public class DatabaseBroker {
 
             System.out.println("Objekat :" + object);
             statement.close();
+            return object;
         } catch (SQLException ex) {
             System.out.println("Neuspesno dodavanje objekta " + object.getClass() + " u bazu!\n" + ex.getMessage());
             ex.printStackTrace();

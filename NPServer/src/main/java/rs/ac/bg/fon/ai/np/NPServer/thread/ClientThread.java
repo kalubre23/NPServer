@@ -191,7 +191,7 @@ public class ClientThread extends Thread {
                                 break;
                             case SACUVAJ_VLASNIKA:
                                 Vlasnik vlasnikDodaj = (Vlasnik) request.getArgument();
-                                controller.sacuvajVlasnika(vlasnikDodaj);
+                                vlasnikDodaj = controller.sacuvajVlasnika(vlasnikDodaj);
                                 response.setResult(vlasnikDodaj);
                                 break;
                             case PRONADJI_VLASNIKE:

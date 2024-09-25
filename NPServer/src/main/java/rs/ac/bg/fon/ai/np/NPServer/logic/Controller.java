@@ -244,9 +244,10 @@ public class Controller {
      * @param vlasnikDodaj koga treba dodati u bazu, tipa {@link Vlasnik}
      * @throws Exception ako dodje do greske prilikom poziva sistemske operacije
      */
-    public void sacuvajVlasnika(Vlasnik vlasnikDodaj) throws Exception {
+    public Vlasnik sacuvajVlasnika(Vlasnik vlasnikDodaj) throws Exception {
         SacuvajVlasnika sacuvajVlasnika = new SacuvajVlasnika(this.test);
         sacuvajVlasnika.execute(vlasnikDodaj);
+        return sacuvajVlasnika.getVlasnik();
     }
 
     /**

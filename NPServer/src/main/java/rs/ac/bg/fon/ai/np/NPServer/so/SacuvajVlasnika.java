@@ -17,6 +17,13 @@ import rs.ac.bg.fon.ai.np.NPCommon.domain.Vlasnik;
  */
 public class SacuvajVlasnika extends AbstractSO{
 
+    Vlasnik vlasnik;
+
+    public Vlasnik getVlasnik() {
+        return vlasnik;
+    }
+    
+    
     /**
      * Neparametrizovani konstruktor koji poziva konstruktor opste sistemske operacije koja je nasledjena.
      * @throws Exception ako dodje do greske pri izvrsavanju konstruktora nadklase
@@ -33,7 +40,7 @@ public class SacuvajVlasnika extends AbstractSO{
      */
     @Override
     protected void executeOperation(DomenskiObjekat object) throws Exception {
-        databaseBroker.sacuvaj(object);
+        vlasnik = (Vlasnik) databaseBroker.sacuvaj(object);
     }
 
     /**
